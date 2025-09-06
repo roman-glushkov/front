@@ -1,0 +1,14 @@
+1. установил Node.js и NPM
+Проверка:
+node --version
+npm --version
+
+2. Установка TypeScript
+cd C:\PGTU\front\LAB_1
+npm init -y (-y автоматом соглашается со всем)
+npm install typescript --save-dev - скачивает пакет и зависимости кидает в node_modules
+Проверка:
+npx tsc --version
+
+3. Создал файл calc.tp
+
