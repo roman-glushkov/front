@@ -1,5 +1,7 @@
 //ФУНКЦИИ
 
+import { Presentation } from "./types of presentation";
+
 // Изменить название презентации
 function changeTitle(
   presentation: Presentation,
@@ -101,6 +103,7 @@ function changeText(
   });
   return { ...slide, elements: newElements };
 }
+
 // Изменить размер текста
 function changeTextSize(
   slide: Slide,

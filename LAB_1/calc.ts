@@ -1,15 +1,7 @@
-function calc(expression: string, isRootCall: boolean = true): number {
-  //
-  //
-  //
-  //разбить на функции, вывод и вычесление отдельно
-  //
-  //
-  //
-  //
+// Функция только для вычислений
+function calculate(expression: string): { result: number; error?: string } {
   if (!expression.trim()) {
-    if (isRootCall) console.log("Ошибка: Пустое выражение");
-    return 0;
+    return { result: 0, error: "Пустое выражение" };
   }
 
   let expr = expression.replace(/\s+/g, " ").trim();
@@ -19,26 +11,27 @@ function calc(expression: string, isRootCall: boolean = true): number {
     const close = expr.indexOf(")", open);
 
     if (close === -1) {
-      if (isRootCall) console.log("Ошибка: Не хватает закрывающей скобки");
-      return 0;
+      return { result: 0, error: "Не хватает закрывающей скобки" };
     }
 
     const inside = expr.slice(open + 1, close);
 
     if (!inside.trim()) {
-      if (isRootCall) console.log("Ошибка: Пустые скобки");
-      return 0;
+      return { result: 0, error: "Пустые скобки" };
     }
 
-    const result = calc(inside, false);
-    expr = expr.slice(0, open) + result + expr.slice(close + 1);
+    const innerResult = calculate(inside);
+    if (innerResult.error) {
+      return innerResult;
+    }
+
+    expr = expr.slice(0, open) + innerResult.result + expr.slice(close + 1);
   }
 
   const parts = expr.split(" ").filter((part) => part !== "");
 
   if (parts.length === 0) {
-    if (isRootCall) console.log("Ошибка: Пустое выражение");
-    return 0;
+    return { result: 0, error: "Пустое выражение" };
   }
 
   const numbers: number[] = [];
@@ -48,8 +41,7 @@ function calc(expression: string, isRootCall: boolean = true): number {
 
     if (part === "+" || part === "-" || part === "*" || part === "/") {
       if (numbers.length < 2) {
-        if (isRootCall) console.log("Ошибка: Не хватает чисел для операции");
-        return 0;
+        return { result: 0, error: "Не хватает чисел для операции" };
       }
 
       const a = numbers.pop()!;
@@ -60,29 +52,35 @@ function calc(expression: string, isRootCall: boolean = true): number {
       else if (part === "*") numbers.push(a * b);
       else if (part === "/") {
         if (b === 0) {
-          if (isRootCall) console.log("Ошибка: Нельзя делить на ноль");
-          return 0;
+          return { result: 0, error: "Нельзя делить на ноль" };
         }
         numbers.push(a / b);
       }
     } else {
       const num = Number(part);
       if (isNaN(num)) {
-        if (isRootCall) console.log(`Ошибка: Непонятный символ: ${part}`);
-        return 0;
+        return { result: 0, error: `Непонятный символ: ${part}` };
       }
       numbers.push(num);
     }
   }
 
   if (numbers.length !== 1) {
-    if (isRootCall) console.log("Ошибка: Неправильное выражение");
-    return 0;
+    return { result: 0, error: "Неправильное выражение" };
   }
 
-  const result = numbers[0];
-  if (isRootCall) console.log(result);
-  return result;
+  return { result: numbers[0] };
+}
+
+// Функция только для вывода
+function calc(expression: string): void {
+  const calculation = calculate(expression);
+
+  if (calculation.error) {
+    console.log(`Ошибка: ${calculation.error}`);
+  } else {
+    console.log(calculation.result);
+  }
 }
 
 console.log("Проверка работы:");

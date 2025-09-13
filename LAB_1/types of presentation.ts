@@ -1,7 +1,9 @@
 //ТИПЫ
 
+//SlideCollection убрать, но селектрсайз закинуть в презентацию, переназвать элемент, на Slideelement и рассписать что находится в массиве
+
 //презентация
-type Presentation = {
+export type Presentation = {
   title: string;
   slides: Slide[];
   currentSlideId: string;
