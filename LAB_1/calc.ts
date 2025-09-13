@@ -1,4 +1,12 @@
 function calc(expression: string, isRootCall: boolean = true): number {
+  //
+  //
+  //
+  //разбить на функции, вывод и вычесление отдельно
+  //
+  //
+  //
+  //
   if (!expression.trim()) {
     if (isRootCall) console.log("Ошибка: Пустое выражение");
     return 0;

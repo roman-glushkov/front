@@ -11,4 +11,6 @@ npm install typescript --save-dev - скачивает пакет и завис�
 npx tsc --version
 
 3. Создал файл calc.tp
+тестим:
+npx tsx calc.ts
 
