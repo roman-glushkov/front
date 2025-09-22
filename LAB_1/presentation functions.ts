@@ -1,6 +1,14 @@
+// presentation functions.ts
 //ФУНКЦИИ
 
-import { Presentation } from "./types of presentation";
+import {
+  Presentation,
+  Slide,
+  TextElement,
+  ImageElement,
+  Background,
+  SlideElement,
+} from "./types of presentation";
 
 // Изменить название презентации
 function changeTitle(
