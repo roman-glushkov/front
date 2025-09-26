@@ -1,0 +1,54 @@
+.container {
+  padding: 20px;
+  font-family: Arial;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.slide {
+  border: 1px solid gray;
+  padding: 10px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.slide.selected {
+  border: 2px solid red;
+  background-color: #f0f0f0;
+}
+
+.workspace {
+  border: 1px solid #ccc;
+  padding: 20px;
+  min-height: 400px;
+}
+
+.element {
+  border: 1px solid black;
+  padding: 10px;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.element.selected {
+  border: 2px solid blue;
+}
+
+.toolbar {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+input {
+  padding: 5px;
+  width: 300px;
+  margin-right: 10px;
+}

@@ -1,34 +1,19 @@
 //ФУНКЦИИ
 
-import {
-  Presentation,
-  Slide,
-  TextElement,
-  ImageElement,
-  Background,
-} from "./types of presentation";
+import { Presentation, Slide, TextElement, ImageElement, Background } from '../types/presentation';
 
 // Изменить название презентации
-export function changeTitle(
-  presentation: Presentation,
-  newTitle: string
-): Presentation {
+export function changeTitle(presentation: Presentation, newTitle: string): Presentation {
   return { ...presentation, title: newTitle };
 }
 
 // Добавить новый слайд
-export function addSlide(
-  presentation: Presentation,
-  newSlide: Slide
-): Presentation {
+export function addSlide(presentation: Presentation, newSlide: Slide): Presentation {
   return { ...presentation, slides: [...presentation.slides, newSlide] };
 }
 
 // Удалить слайд
-export function removeSlide(
-  presentation: Presentation,
-  slideId: string
-): Presentation {
+export function removeSlide(presentation: Presentation, slideId: string): Presentation {
   return {
     ...presentation,
     slides: presentation.slides.filter((slide) => slide.id !== slideId),
@@ -99,13 +84,9 @@ export function changeElementSize(
 }
 
 // Изменить текст
-export function changeText(
-  slide: Slide,
-  elementId: string,
-  newContent: string
-): Slide {
+export function changeText(slide: Slide, elementId: string, newContent: string): Slide {
   const newElements = slide.elements.map((element) => {
-    if (element.type === "text" && element.id === elementId) {
+    if (element.type === 'text' && element.id === elementId) {
       return { ...element, content: newContent };
     }
     return element;
@@ -114,14 +95,13 @@ export function changeText(
 }
 
 // Изменить размер текста
-export function changeTextSize(
-  slide: Slide,
-  elementId: string,
-  newSize: number
-): Slide {
+export function changeTextSize(slide: Slide, elementId: string, newSize: number): Slide {
   const newElements = slide.elements.map((element) => {
-    if (element.type === "text" && element.id === elementId) {
-      return { ...element, fontSize: newSize };
+    if (element.id === elementId && element.type === 'text') {
+      return {
+        ...element,
+        fontSize: newSize,
+      };
     }
     return element;
   });
@@ -129,14 +109,13 @@ export function changeTextSize(
 }
 
 // Изменить шрифт текста
-export function changeTextFont(
-  slide: Slide,
-  elementId: string,
-  newFont: string
-): Slide {
+export function changeTextFont(slide: Slide, elementId: string, newFont: string): Slide {
   const newElements = slide.elements.map((element) => {
-    if (element.type === "text" && element.id === elementId) {
-      return { ...element, font: newFont };
+    if (element.id === elementId && element.type === 'text') {
+      return {
+        ...element,
+        font: newFont,
+      };
     }
     return element;
   });
@@ -144,9 +123,6 @@ export function changeTextFont(
 }
 
 // Изменить фон слайда
-export function changeBackground(
-  slide: Slide,
-  newBackground: Background
-): Slide {
+export function changeBackground(slide: Slide, newBackground: Background): Slide {
   return { ...slide, background: newBackground };
 }
