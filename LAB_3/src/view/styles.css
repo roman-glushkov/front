@@ -1,54 +1,186 @@
 .container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.section {
-  margin-bottom: 20px;
-}
-
-.slide {
-  border: 1px solid gray;
-  padding: 10px;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.slide.selected {
-  border: 2px solid red;
-  background-color: #f0f0f0;
-}
-
-.workspace {
-  border: 1px solid #ccc;
-  padding: 20px;
-  min-height: 400px;
-}
-
-.element {
-  border: 1px solid black;
-  padding: 10px;
-  position: absolute;
-  cursor: pointer;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2ebf0 100%);
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+.presentation-info.top {
+  background: linear-gradient(135deg, #c7d2fe 0%, #e0f2fe 100%);
+  padding: 16px 24px;
+  border-bottom: 2px solid #93c5fd;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.presentation-info.top h3 {
+  color: #1d4ed8;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.presentation-info.top input {
+  margin-bottom: 8px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.header.toolbar-split {
+  display: flex;
+  gap: 24px;
+  background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+  padding: 12px 20px;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 10px;
   align-items: center;
-  justify-content: center;
-  white-space: nowrap;
+}
+
+.toolbar-group button {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+  color: #1f2937;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.toolbar-group button:hover {
+  background: linear-gradient(180deg, #f3f4f6 0%, #e0f2fe 100%);
+  border-color: #93c5fd;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
   overflow: hidden;
 }
 
-.element.selected {
-  border: 2px solid blue;
-}
-
-.toolbar {
+.slides-panel, .workspace-panel, .tools-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  border: 1px solid #e2e8f0;
   display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-input {
-  padding: 5px;
+.slides-panel {
+  width: 260px;
+  overflow-y: auto;
+}
+
+.workspace-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tools-panel {
   width: 300px;
-  margin-right: 10px;
+}
+
+.slides-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slide {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f8fafc;
+  padding: 6px;
+  transition: 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.slide:hover {
+  border-color: #60a5fa;
+}
+
+.slide.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.slide-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+}
+
+.thumb-element {
+  position: absolute;
+  font-size: 10px;
+  overflow: hidden;
+  border-radius: 3px;
+  text-overflow: ellipsis;
+}
+
+.slide-index {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 4px;
+  color: #374151;
+}
+
+.workspace {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f9fafb 0%, #e0f2fe 100%);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.workspace-content {
+  position: relative;
+  aspect-ratio: 16/9;
+  width: 100%;
+  max-width: 960px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.element {
+  position: absolute;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 4px;
+  transition: all 0.2s ease;
+}
+
+.element:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+.element.selected {
+  border: 2px solid #2563eb;
 }
