@@ -1,20 +1,16 @@
-//ТИПЫ
-
-//SlideCollection убрать, но селектрсайз закинуть в презентацию, переназвать элемент, на Slideelement и рассписать что находится в массиве
-
 //презентация
 export type Presentation = {
   title: string;
   slides: Slide[];
   currentSlideId: string;
-  selectedSlideIds: string[]; //
+  selectedSlideIds: string[];
 };
 
 //слайд
 export type Slide = {
   id: string;
   background: Background;
-  elements: SlideElement[]; //
+  elements: SlideElement[];
 };
 
 //выделение
@@ -29,25 +25,37 @@ export type Background =
   | { type: "image"; value: string }
   | { type: "none" };
 
-export type SlideElement = TextElement | ImageElement; //
+export type SlideElement = TextElement | ImageElement;
+
+// Позиция элемента
+export type Position = {
+  x: number;
+  y: number;
+};
+
+// Размер элемента
+export type Size = {
+  width: number;
+  height: number;
+};
+
+type BaseElement = {
+  id: string;
+  position: Position;
+  size: Size;
+};
 
 //текстовый элемент
-export type TextElement = {
+export type TextElement = BaseElement & {
   type: "text";
-  id: string;
   content: string;
-  position: { x: number; y: number };
-  size: { width: number; height: number };
   font: string;
   fontSize: number;
   color: string;
 };
 
 //изображение
-export type ImageElement = {
+export type ImageElement = BaseElement & {
   type: "image";
-  id: string;
   src: string;
-  position: { x: number; y: number };
-  size: { width: number; height: number };
 };

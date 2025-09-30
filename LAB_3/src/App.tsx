@@ -4,6 +4,7 @@ import * as fns from './store/functions/presentation';
 import * as tpl from './store/templates/presentation';
 import './view/styles.css';
 
+//начальное состояние презентации
 const initialPresentation: Presentation = {
   title: 'Новая презентация',
   slides: [],
@@ -11,6 +12,7 @@ const initialPresentation: Presentation = {
   selectedSlideIds: [],
 };
 
+//массив кнопок интерфейса
 const actions = [
   'Добавить слайд',
   'Удалить слайд',
@@ -27,12 +29,13 @@ const actions = [
 ];
 
 function App() {
-  const [pres, setPres] = useState(initialPresentation);
-  const [selSlideId, setSelSlideId] = useState('');
-  const [selElId, setSelElId] = useState('');
+  const [pres, setPres] = useState(initialPresentation); //состояние всей презентации
+  const [selSlideId, setSelSlideId] = useState(''); //ID выбранного слайда
+  const [selElId, setSelElId] = useState(''); //ID выбранного элемента
 
   const slide = pres.slides.find((s) => s.id === selSlideId);
 
+  //функция для обновления слайда
   const updateSlide = (updater: (s: Slide) => Slide) => {
     if (!slide) return;
     setPres((prev) => ({
@@ -42,6 +45,9 @@ function App() {
   };
 
   const handleAction = (action: string) => {
+    // Вывод в консоль названия действия
+    console.log('Совершенное действие:', action);
+
     switch (action) {
       case 'Добавить слайд': {
         const newSlide = tpl.createSlide();
@@ -119,15 +125,39 @@ function App() {
     }
   };
 
+  // Обработчик изменения названия презентации
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    setPres(fns.changeTitle(pres, newTitle));
+    // Вывод в консоль нового названия
+    console.log('Новое название презентации:', newTitle);
+  };
+
+  // Обработчик клика по слайду
+  const handleSlideClick = (slideId: string, index: number) => {
+    setSelSlideId(slideId);
+    setSelElId('');
+    // Вывод в консоль id слайда и его порядкового номера
+    console.log('ID слайда:', slideId, 'Порядковый номер:', index + 1);
+  };
+
+  // Обработчик клика по элементу
+  const handleElementClick = (elementId: string, backgroundColor: string, slideId: string) => {
+    setSelElId(elementId);
+    setSelSlideId(slideId);
+    // Вывод в консоль id элемента и его цвета фона
+    console.log('ID элемента:', elementId, 'Цвет фона:', backgroundColor);
+  };
+
   return (
     <div className="container">
+      {/* информации о презентации*/}
       <h1>Presentation Maker</h1>
-
       <div className="section">
         <h3>Презентация: {pres.title}</h3>
         <input
           value={pres.title}
-          onChange={(e) => setPres(fns.changeTitle(pres, e.target.value))}
+          onChange={handleTitleChange} // Используем отдельный обработчик
           placeholder="Название презентации"
         />
         <p>
@@ -135,16 +165,15 @@ function App() {
         </p>
       </div>
 
+      {/*панель слайдов*/}
       <div className="section">
         <h4>Слайды:</h4>
         <div className="toolbar">
           {pres.slides.map((s, i) => (
             <div
               key={s.id}
-              onClick={() => {
-                setSelSlideId(s.id);
-                setSelElId('');
-              }}
+              onClick={() => handleSlideClick(s.id, i)}
+              // подсвечиваем выбранный слайд
               className={`slide ${selSlideId === s.id ? 'selected' : ''}`}
             >
               Слайд {i + 1}
@@ -153,33 +182,37 @@ function App() {
         </div>
       </div>
 
+      {/* рабочая область */}
       <div className="workspace">
         <h4>Рабочая область:</h4>
         {slide ? (
           <div
             style={{
+              // устанавливаем фон слайда
               backgroundColor: slide.background.type === 'color' ? slide.background.value : 'white',
               padding: '20px',
               minHeight: '300px',
               position: 'relative',
             }}
           >
+            {' '}
+            {/*отображение элементов на слайде*/}
             {slide.elements.map((el) => {
               const textEl = el as TextElement;
+              const backgroundColor = el.type === 'text' ? textEl.color : '#e0e0e0';
+
               return (
                 <div
                   key={el.id}
-                  onClick={() => {
-                    setSelElId(el.id);
-                    setSelSlideId(slide.id);
-                  }}
+                  onClick={() => handleElementClick(el.id, backgroundColor, slide.id)}
+                  // подсветка элемента
                   className={`element ${selElId === el.id ? 'selected' : ''}`}
                   style={{
                     left: el.position.x,
                     top: el.position.y,
                     width: el.size.width,
                     height: el.size.height,
-                    backgroundColor: el.type === 'text' ? textEl.color : '#e0e0e0',
+                    backgroundColor: backgroundColor,
                     font: el.type === 'text' ? `${textEl.fontSize}px ${textEl.font}` : '16px Arial',
                   }}
                 >
@@ -193,6 +226,7 @@ function App() {
         )}
       </div>
 
+      {/*панель инструментов*/}
       <div className="section">
         <h4>Инструменты:</h4>
         <div className="toolbar">

@@ -28,7 +28,7 @@ export const imageElementTemplate: ImageElement = {
 
 export const backgroundTemplate: Background = {
   type: 'color',
-  value: '#FF0000',
+  value: '#0026ffff',
 };
 
 // Позиции и размеры для изменений

@@ -1,11 +1,11 @@
-//ФУНКЦИИ
-
 import {
   Presentation,
   Slide,
   TextElement,
   ImageElement,
   Background,
+  Position,
+  Size,
 } from "./types of presentation";
 
 // Изменить название презентации
@@ -21,7 +21,7 @@ export function addSlide(
   presentation: Presentation,
   newSlide: Slide
 ): Presentation {
-  return { ...presentation, slides: [...presentation.slides, newSlide] };
+  return { ...presentation, slides: [...presentation.slides, { ...newSlide }] };
 }
 
 // Удалить слайд
@@ -52,12 +52,12 @@ export function moveSlide(
 
 // Добавить текст на слайд
 export function addText(slide: Slide, textElement: TextElement): Slide {
-  return { ...slide, elements: [...slide.elements, textElement] };
+  return { ...slide, elements: [...slide.elements, { ...textElement }] };
 }
 
 // Добавить картинку на слайд
 export function addImage(slide: Slide, imageElement: ImageElement): Slide {
-  return { ...slide, elements: [...slide.elements, imageElement] };
+  return { ...slide, elements: [...slide.elements, { ...imageElement }] };
 }
 
 // Удалить элемент со слайда
@@ -72,11 +72,11 @@ export function removeElement(slide: Slide, elementId: string): Slide {
 export function changeElementPosition(
   slide: Slide,
   elementId: string,
-  newPosition: { x: number; y: number }
+  newPosition: Position
 ): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.id === elementId) {
-      return { ...element, position: newPosition };
+      return { ...element, position: { ...newPosition } };
     }
     return element;
   });
@@ -87,11 +87,11 @@ export function changeElementPosition(
 export function changeElementSize(
   slide: Slide,
   elementId: string,
-  newSize: { width: number; height: number }
+  newSize: Size
 ): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.id === elementId) {
-      return { ...element, size: newSize };
+      return { ...element, size: { ...newSize } };
     }
     return element;
   });
@@ -148,5 +148,5 @@ export function changeBackground(
   slide: Slide,
   newBackground: Background
 ): Slide {
-  return { ...slide, background: newBackground };
+  return { ...slide, background: { ...newBackground } };
 }

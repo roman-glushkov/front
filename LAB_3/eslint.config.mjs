@@ -1,32 +1,49 @@
-// eslint.config.mjs
-import js from '@eslint/js';
-import typescriptPlugin from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
-import globals from 'globals';
+import js from "@eslint/js";
+import typescriptPlugin from "@typescript-eslint/eslint-plugin";
+import typescriptParser from "@typescript-eslint/parser";
+import globals from "globals";
+import prettierConfig from "eslint-config-prettier";
+import pluginPrettier from "eslint-plugin-prettier";
+import reactPlugin from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 
 export default [
-  // Базовые правила ESLint
   js.configs.recommended,
-
-  // TypeScript правила
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       parser: typescriptParser,
       globals: {
-        ...globals.browser, // Добавляем браузерные глобальные переменные
+        ...globals.browser,
+        ...globals.es2020,
+      },
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
     plugins: {
-      '@typescript-eslint': typescriptPlugin,
+      "@typescript-eslint": typescriptPlugin,
+      prettier: pluginPrettier,
+      react: reactPlugin,
+      "react-hooks": reactHooks,
     },
     rules: {
       ...typescriptPlugin.configs.recommended.rules,
+      "prettier/prettier": "error",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/jsx-uses-vars": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
-
-  // Игнорируемые файлы
-  {
-    ignores: ['dist/', 'node_modules/'],
-  },
+  { ignores: ["dist/", "node_modules/", "*.config.js"] },
+  prettierConfig,
 ];
