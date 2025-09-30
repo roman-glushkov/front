@@ -1,0 +1,57 @@
+/* src/common/SlidesPanel.css - exact slides styles from original */
+
+.slides-panel {
+  width: 260px;
+  overflow-y: auto;
+}
+
+.slides-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slide {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f8fafc;
+  padding: 6px;
+  transition: 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.slide:hover {
+  border-color: #60a5fa;
+}
+
+.slide.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.slide-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+}
+
+.thumb-element {
+  position: absolute;
+  font-size: 10px;
+  overflow: hidden;
+  border-radius: 3px;
+  text-overflow: ellipsis;
+}
+
+.slide-index {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 4px;
+  color: #374151;
+}
