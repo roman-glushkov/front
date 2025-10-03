@@ -1,14 +1,11 @@
-// src/common/Toolbar.tsx
 import React from 'react';
 import './Toolbar.css';
 
 type Props = { onAction: (action: string) => void };
 
+// Группы кнопок
 const groups = [
-  {
-    title: 'Слайды',
-    actions: ['Добавить слайд', 'Удалить слайд', 'Переместить слайд'],
-  },
+  { title: 'Слайды', actions: ['Добавить слайд', 'Удалить слайд', 'Переместить слайд'] },
   {
     title: 'Текст',
     actions: ['Добавить текст', 'Изменить текст', 'Изменить размер текста', 'Изменить шрифт'],
@@ -22,12 +19,10 @@ const groups = [
       'Изменить размер элемента',
     ],
   },
-  {
-    title: 'Оформление',
-    actions: ['Изменить фон'],
-  },
+  { title: 'Оформление', actions: ['Изменить фон'] },
 ];
 
+// Панель инструментов
 export default function Toolbar({ onAction }: Props) {
   return (
     <div className="header toolbar-split">

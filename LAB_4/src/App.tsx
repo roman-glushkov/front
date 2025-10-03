@@ -1,4 +1,3 @@
-// src/App.tsx
 import React, { useState } from 'react';
 import { Presentation } from './store/types/presentation';
 import { Editor } from './store/editor';
@@ -7,6 +6,7 @@ import SlidesPanel from './common/SlidesPanel';
 import Workspace from './common/Workspace';
 import './view/styles.css';
 
+// Начальная пустая презентация
 const initialPresentation: Presentation = {
   title: 'Новая презентация',
   slides: [],
@@ -14,6 +14,7 @@ const initialPresentation: Presentation = {
   selectedSlideIds: [],
 };
 
+// Главный компонент приложения
 function App() {
   const [editor] = useState(new Editor(initialPresentation));
   const [, forceUpdate] = useState({});
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <div className="container">
+      {/* Инфо о презентации */}
       <div className="presentation-info top">
         <h3>Презентация: {editor.pres.title}</h3>
         <input
@@ -36,6 +38,7 @@ function App() {
         </p>
       </div>
 
+      {/* Панель инструментов */}
       <Toolbar
         onAction={(action) => {
           editor.doAction(action);
@@ -43,12 +46,13 @@ function App() {
         }}
       />
 
+      {/* Основное рабочее пространство */}
       <div className="main-content">
         <SlidesPanel editor={editor} onUpdate={rerender} />
         <Workspace editor={editor} onUpdate={rerender} />
         <div className="tools-panel">
           <h3>Доп. настройки</h3>
-          <p>Здесь будет в скором времени настройка цветовой гаммы или что-то такое.</p>
+          <p>Здесь будет настройка цветовой гаммы или другое.</p>
         </div>
       </div>
     </div>

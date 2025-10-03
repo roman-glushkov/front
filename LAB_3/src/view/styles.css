@@ -12,13 +12,15 @@
   padding: 16px 24px;
   border-bottom: 2px solid #93c5fd;
   border-radius: 0 0 12px 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
 }
+
 .presentation-info.top h3 {
   color: #1d4ed8;
   font-size: 18px;
   margin-bottom: 8px;
 }
+
 .presentation-info.top input {
   margin-bottom: 8px;
   background: #f9fafb;
@@ -30,8 +32,8 @@
   gap: 24px;
   background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
   padding: 12px 20px;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
 
 .toolbar-group {
@@ -41,7 +43,7 @@
 }
 
 .toolbar-group button {
-  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+  background: linear-gradient(180deg, #fff 0%, #f0f9ff 100%);
   color: #1f2937;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
@@ -49,7 +51,7 @@
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 .toolbar-group button:hover {
@@ -65,10 +67,12 @@
   overflow: hidden;
 }
 
-.slides-panel, .workspace-panel, .tools-panel {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+.slides-panel,
+.workspace-panel,
+.tools-panel {
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
   padding: 16px;
   border: 1px solid #e2e8f0;
   display: flex;
@@ -103,7 +107,7 @@
   background: #f8fafc;
   padding: 6px;
   transition: 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
 }
 
 .slide:hover {
@@ -113,7 +117,7 @@
 .slide.selected {
   border-color: #2563eb;
   background: #eff6ff;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 2px 6px rgb(37 99 235 / 30%);
 }
 
 .slide-thumbnail {
@@ -123,7 +127,7 @@
   border: 1px solid #d1d5db;
   border-radius: 6px;
   overflow: hidden;
-  background: white;
+  background: #fff;
 }
 
 .thumb-element {
@@ -156,11 +160,11 @@
   aspect-ratio: 16/9;
   width: 100%;
   max-width: 960px;
-  background: white;
+  background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 .element {
@@ -178,7 +182,7 @@
 
 .element:hover {
   border-color: #3b82f6;
-  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 6px rgb(59 130 246 / 30%);
 }
 
 .element.selected {

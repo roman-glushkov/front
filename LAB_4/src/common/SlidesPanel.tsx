@@ -1,4 +1,3 @@
-// src/common/SlidesPanel.tsx
 import React from 'react';
 import { Editor } from '../store/editor';
 import { TextElement } from '../store/types/presentation';
@@ -9,12 +8,14 @@ type Props = {
   onUpdate: () => void;
 };
 
+// Панель со списком слайдов
 export default function SlidesPanel({ editor, onUpdate }: Props) {
   return (
     <div className="slides-panel">
       <h3>Слайды</h3>
       <div className="slides-container">
         {editor.pres.slides.map((s, i) => (
+          // Один слайд в списке
           <div
             key={s.id}
             onClick={() => {
@@ -23,12 +24,14 @@ export default function SlidesPanel({ editor, onUpdate }: Props) {
             }}
             className={`slide ${editor.selSlideId === s.id ? 'selected' : ''}`}
           >
+            {/* Миниатюра слайда */}
             <div
               className="slide-thumbnail"
               style={{
                 backgroundColor: s.background.type === 'color' ? s.background.value : 'white',
               }}
             >
+              {/* Элементы внутри миниатюры */}
               {s.elements.map((el) => {
                 const textEl = el as TextElement;
                 const bg = el.type === 'text' ? textEl.color : '#e0e0e0';
@@ -53,6 +56,7 @@ export default function SlidesPanel({ editor, onUpdate }: Props) {
                 );
               })}
             </div>
+            {/* Номер слайда */}
             <div className="slide-index">Слайд {i + 1}</div>
           </div>
         ))}

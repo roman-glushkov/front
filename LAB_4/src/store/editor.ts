@@ -1,4 +1,3 @@
-// src/store/editor.ts
 import { Presentation, Slide } from './types/presentation';
 import * as fns from './functions/presentation';
 import * as tpl from './templates/presentation';
@@ -12,11 +11,12 @@ export class Editor {
     this.pres = initial;
   }
 
+  // Получение текущего выбранного слайда
   get currentSlide(): Slide | undefined {
     return this.pres.slides.find((s) => s.id === this.selSlideId);
   }
 
-  // --- Слайды ---
+  //Слайды
   addSlide() {
     const newSlide = tpl.createSlide();
     this.pres = fns.addSlide(this.pres, newSlide);
@@ -42,7 +42,7 @@ export class Editor {
     }
   }
 
-  // --- Элементы ---
+  //Элементы
   addText() {
     if (this.currentSlide) {
       this.updateSlide((s) => fns.addText(s, tpl.createTextElement()));
@@ -66,6 +66,7 @@ export class Editor {
     }
   }
 
+  // Изменение текста элемента
   changeText() {
     if (this.currentSlide && this.selElId) {
       this.updateSlide((s) => fns.changeText(s, this.selElId, tpl.newTextContent));
@@ -73,6 +74,7 @@ export class Editor {
     }
   }
 
+  // Изменение размера текста
   changeTextSize() {
     if (this.currentSlide && this.selElId) {
       this.updateSlide((s) => fns.changeTextSize(s, this.selElId, tpl.newFontSize));
@@ -80,6 +82,7 @@ export class Editor {
     }
   }
 
+  // Изменение шрифта текста
   changeTextFont() {
     if (this.currentSlide && this.selElId) {
       this.updateSlide((s) => fns.changeTextFont(s, this.selElId, tpl.newFont));
@@ -87,6 +90,7 @@ export class Editor {
     }
   }
 
+  // Изменение позиции элемента
   changeElementPosition() {
     if (this.currentSlide && this.selElId) {
       this.updateSlide((s) => fns.changeElementPosition(s, this.selElId, tpl.newPosition));
@@ -94,6 +98,7 @@ export class Editor {
     }
   }
 
+  // Изменение размеров элемента
   changeElementSize() {
     if (this.currentSlide && this.selElId) {
       this.updateSlide((s) => fns.changeElementSize(s, this.selElId, tpl.newSize));
@@ -101,7 +106,7 @@ export class Editor {
     }
   }
 
-  // --- Фон ---
+  //Фон
   changeBackground() {
     if (this.currentSlide) {
       this.updateSlide((s) => fns.changeBackground(s, tpl.backgroundTemplate));
@@ -109,26 +114,26 @@ export class Editor {
     }
   }
 
-  // --- Название ---
+  //Название
   changeTitle(newTitle: string) {
     this.pres = fns.changeTitle(this.pres, newTitle);
     console.log('Новое название презентации:', newTitle);
   }
 
-  // --- Выбор ---
+  //Выбор
   selectSlide(slideId: string, index: number) {
     this.selSlideId = slideId;
     this.selElId = '';
     console.log('ID слайда:', slideId, 'Порядковый номер:', index + 1);
   }
 
-  selectElement(elementId: string, backgroundColor: string, slideId: string) {
+  selectElement(elementId: string, slideId: string) {
     this.selElId = elementId;
     this.selSlideId = slideId;
-    console.log('ID элемента:', elementId, 'Цвет фона:', backgroundColor);
+    console.log('ID элемента:', elementId, 'ID слайда:', slideId);
   }
 
-  // вспомогательный
+  // Вспомогательная функция для обновления слайда
   private updateSlide(updater: (s: Slide) => Slide) {
     if (!this.currentSlide) return;
     this.pres = {
@@ -137,7 +142,7 @@ export class Editor {
     };
   }
 
-  // Универсальный обработчик (удобно для тулбара)
+  // Универсальный обработчик действий (для тулбара)
   doAction(action: string) {
     switch (action) {
       case 'Добавить слайд':

@@ -1,14 +1,11 @@
-// src/common/Workspace.tsx
 import React from 'react';
 import { Editor } from '../store/editor';
 import { TextElement } from '../store/types/presentation';
 import './Workspace.css';
 
-type Props = {
-  editor: Editor;
-  onUpdate: () => void;
-};
+type Props = { editor: Editor; onUpdate: () => void };
 
+// Рабочая область (отображение выбранного слайда)
 export default function Workspace({ editor, onUpdate }: Props) {
   const slide = editor.currentSlide;
 
@@ -23,6 +20,7 @@ export default function Workspace({ editor, onUpdate }: Props) {
               backgroundColor: slide.background.type === 'color' ? slide.background.value : 'white',
             }}
           >
+            {/* Отображение элементов слайда */}
             {slide.elements.map((el) => {
               const textEl = el as TextElement;
               const bg = el.type === 'text' ? textEl.color : '#e0e0e0';

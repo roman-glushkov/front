@@ -4,6 +4,7 @@ import * as fns from './store/functions/presentation';
 import * as tpl from './store/templates/presentation';
 import './view/styles.css';
 
+// Начальное состояние презентации
 const initialPresentation: Presentation = {
   title: 'Новая презентация',
   slides: [],
@@ -12,12 +13,15 @@ const initialPresentation: Presentation = {
 };
 
 function App() {
+  // Состояния презентации, выбранного слайда и элемента
   const [pres, setPres] = useState(initialPresentation);
   const [selSlideId, setSelSlideId] = useState('');
   const [selElId, setSelElId] = useState('');
 
+  // Текущий выбранный слайд
   const slide = pres.slides.find((s) => s.id === selSlideId);
 
+  // Обновление содержимого выбранного слайда
   const updateSlide = (updater: (s: Slide) => Slide) => {
     if (!slide) return;
     setPres((prev) => ({
@@ -26,6 +30,7 @@ function App() {
     }));
   };
 
+  // Обработка действий с презентацией
   const handleAction = (action: string) => {
     console.log('Совершенное действие:', action);
 
@@ -95,27 +100,30 @@ function App() {
     }
   };
 
+  // Изменение названия презентации
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setPres(fns.changeTitle(pres, newTitle));
     console.log('Новое название презентации:', newTitle);
   };
 
+  // Выбор слайда
   const handleSlideClick = (slideId: string, index: number) => {
     setSelSlideId(slideId);
     setSelElId('');
     console.log('ID слайда:', slideId, 'Порядковый номер:', index + 1);
   };
 
+  // Выбор элемента на слайде
   const handleElementClick = (elementId: string, backgroundColor: string, slideId: string) => {
     setSelElId(elementId);
     setSelSlideId(slideId);
-    console.log('ID элемента:', elementId, 'Цвет фона:', backgroundColor);
+    console.log('ID элемента:', elementId);
   };
 
   return (
     <div className="container">
-      {/* Информация о презентации */}
+      {/* Заголовок и инфо о презентации */}
       <div className="presentation-info top">
         <h3>Презентация: {pres.title}</h3>
         <input value={pres.title} onChange={handleTitleChange} placeholder="Название презентации" />
@@ -124,7 +132,7 @@ function App() {
         </p>
       </div>
 
-      {/* Верхний тулбар с разделами */}
+      {/* Панель действий (тулбар) */}
       <div className="header toolbar-split">
         <div className="toolbar-group">
           <button onClick={() => handleAction('Добавить слайд')}>➕ Слайд</button>
@@ -160,6 +168,7 @@ function App() {
                 onClick={() => handleSlideClick(s.id, i)}
                 className={`slide ${selSlideId === s.id ? 'selected' : ''}`}
               >
+                {/* Мини-превью слайда */}
                 <div
                   className="slide-thumbnail"
                   style={{
@@ -235,12 +244,6 @@ function App() {
               <p>Выберите слайд</p>
             )}
           </div>
-        </div>
-
-        {/* Правая панель */}
-        <div className="tools-panel">
-          <h3>Доп. настройки</h3>
-          <p>Здесь можно будет добавить больше контролов.</p>
         </div>
       </div>
     </div>
