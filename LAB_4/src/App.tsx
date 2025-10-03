@@ -48,7 +48,7 @@ function App() {
         <Workspace editor={editor} onUpdate={rerender} />
         <div className="tools-panel">
           <h3>Доп. настройки</h3>
-          <p>Здесь можно будет добавить больше контролов.</p>
+          <p>Здесь будет в скором времени настройка цветовой гаммы или что-то такое.</p>
         </div>
       </div>
     </div>
