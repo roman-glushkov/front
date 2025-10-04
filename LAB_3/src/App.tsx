@@ -4,7 +4,6 @@ import * as fns from './store/functions/presentation';
 import * as tpl from './store/templates/presentation';
 import './view/styles.css';
 
-// Начальное состояние презентации
 const initialPresentation: Presentation = {
   title: 'Новая презентация',
   slides: [],

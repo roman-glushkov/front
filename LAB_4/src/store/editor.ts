@@ -127,9 +127,9 @@ export class Editor {
     console.log('ID слайда:', slideId, 'Порядковый номер:', index + 1);
   }
 
-  selectElement(elementId: string, slideId: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  selectElement(elementId: string, slideId: string, _id: string) {
     this.selElId = elementId;
-    this.selSlideId = slideId;
     console.log('ID элемента:', elementId, 'ID слайда:', slideId);
   }
 
