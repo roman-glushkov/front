@@ -8,17 +8,14 @@ import {
   Size,
 } from '../types/presentation';
 
-// Изменить название презентации
 export function changeTitle(presentation: Presentation, newTitle: string): Presentation {
   return { ...presentation, title: newTitle };
 }
 
-// Добавить новый слайд
 export function addSlide(presentation: Presentation, newSlide: Slide): Presentation {
   return { ...presentation, slides: [...presentation.slides, { ...newSlide }] };
 }
 
-// Удалить слайд
 export function removeSlide(presentation: Presentation, slideId: string): Presentation {
   return {
     ...presentation,
@@ -26,7 +23,6 @@ export function removeSlide(presentation: Presentation, slideId: string): Presen
   };
 }
 
-// Переместить слайд
 export function moveSlide(
   presentation: Presentation,
   slideId: string,
@@ -41,17 +37,14 @@ export function moveSlide(
   return { ...presentation, slides };
 }
 
-// Добавить текст на слайд
 export function addText(slide: Slide, textElement: TextElement): Slide {
   return { ...slide, elements: [...slide.elements, { ...textElement }] };
 }
 
-// Добавить картинку на слайд
 export function addImage(slide: Slide, imageElement: ImageElement): Slide {
   return { ...slide, elements: [...slide.elements, { ...imageElement }] };
 }
 
-// Удалить элемент со слайда
 export function removeElement(slide: Slide, elementId: string): Slide {
   return {
     ...slide,
@@ -59,7 +52,6 @@ export function removeElement(slide: Slide, elementId: string): Slide {
   };
 }
 
-// Изменить позицию элемента
 export function changeElementPosition(
   slide: Slide,
   elementId: string,
@@ -74,7 +66,6 @@ export function changeElementPosition(
   return { ...slide, elements: newElements };
 }
 
-// Изменить размер элемента
 export function changeElementSize(slide: Slide, elementId: string, newSize: Size): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.id === elementId) {
@@ -85,7 +76,6 @@ export function changeElementSize(slide: Slide, elementId: string, newSize: Size
   return { ...slide, elements: newElements };
 }
 
-// Изменить текст
 export function changeText(slide: Slide, elementId: string, newContent: string): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.type === 'text' && element.id === elementId) {
@@ -96,7 +86,6 @@ export function changeText(slide: Slide, elementId: string, newContent: string):
   return { ...slide, elements: newElements };
 }
 
-// Изменить размер текста
 export function changeTextSize(slide: Slide, elementId: string, newSize: number): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.type === 'text' && element.id === elementId) {
@@ -107,7 +96,6 @@ export function changeTextSize(slide: Slide, elementId: string, newSize: number)
   return { ...slide, elements: newElements };
 }
 
-// Изменить шрифт текста
 export function changeTextFont(slide: Slide, elementId: string, newFont: string): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.type === 'text' && element.id === elementId) {
@@ -118,7 +106,6 @@ export function changeTextFont(slide: Slide, elementId: string, newFont: string)
   return { ...slide, elements: newElements };
 }
 
-// Изменить фон слайда
 export function changeBackground(slide: Slide, newBackground: Background): Slide {
   return { ...slide, background: { ...newBackground } };
 }

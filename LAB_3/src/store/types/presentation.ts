@@ -1,4 +1,3 @@
-//презентация
 export type Presentation = {
   title: string;
   slides: Slide[];
@@ -6,20 +5,17 @@ export type Presentation = {
   selectedSlideIds: string[];
 };
 
-//слайд
 export type Slide = {
   id: string;
   background: Background;
   elements: SlideElement[];
 };
 
-//выделение
 export type Selection = {
   slideId: string;
   elementIds: string[];
 };
 
-//фон слайда
 export type Background =
   | { type: 'color'; value: string }
   | { type: 'image'; value: string }
@@ -27,13 +23,11 @@ export type Background =
 
 export type SlideElement = TextElement | ImageElement;
 
-// Позиция элемента
 export type Position = {
   x: number;
   y: number;
 };
 
-// Размер элемента
 export type Size = {
   width: number;
   height: number;
@@ -45,7 +39,6 @@ type BaseElement = {
   size: Size;
 };
 
-//текстовый элемент
 export type TextElement = BaseElement & {
   type: 'text';
   content: string;
@@ -54,7 +47,6 @@ export type TextElement = BaseElement & {
   color: string;
 };
 
-//изображение
 export type ImageElement = BaseElement & {
   type: 'image';
   src: string;

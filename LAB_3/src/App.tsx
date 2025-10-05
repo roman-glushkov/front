@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Presentation, Slide, TextElement } from './store/types/presentation';
-import * as fns from './store/functions/presentation';
-import * as tpl from './store/templates/presentation';
+import * as func from './store/functions/presentation';
+import * as temp from './store/templates/presentation';
 import './view/styles.css';
 
 const initialPresentation: Presentation = {
@@ -12,15 +12,12 @@ const initialPresentation: Presentation = {
 };
 
 function App() {
-  // Состояния презентации, выбранного слайда и элемента
   const [pres, setPres] = useState(initialPresentation);
   const [selSlideId, setSelSlideId] = useState('');
   const [selElId, setSelElId] = useState('');
 
-  // Текущий выбранный слайд
   const slide = pres.slides.find((s) => s.id === selSlideId);
 
-  // Обновление содержимого выбранного слайда
   const updateSlide = (updater: (s: Slide) => Slide) => {
     if (!slide) return;
     setPres((prev) => ({
@@ -29,109 +26,118 @@ function App() {
     }));
   };
 
-  // Обработка действий с презентацией
   const handleAction = (action: string) => {
     console.log('Совершенное действие:', action);
 
     switch (action) {
       case 'Добавить слайд': {
-        const newSlide = tpl.createSlide();
-        setPres(fns.addSlide(pres, newSlide));
+        const newSlide = temp.createSlide();
+        setPres(func.addSlide(pres, newSlide));
         setSelSlideId(newSlide.id);
         break;
       }
       case 'Удалить слайд': {
         if (!selSlideId) return;
-        const updated = fns.removeSlide(pres, selSlideId);
+        const updated = func.removeSlide(pres, selSlideId);
         setPres(updated);
         setSelSlideId(updated.slides[0]?.id || '');
         setSelElId('');
         break;
       }
       case 'Добавить текст': {
-        if (slide) updateSlide((s) => fns.addText(s, tpl.createTextElement()));
+        if (slide) updateSlide((s) => func.addText(s, temp.createTextElement()));
         break;
       }
       case 'Добавить изображение': {
-        if (slide) updateSlide((s) => fns.addImage(s, tpl.createImageElement()));
+        if (slide) updateSlide((s) => func.addImage(s, temp.createImageElement()));
         break;
       }
       case 'Удалить элемент': {
         if (slide && selElId) {
-          updateSlide((s) => fns.removeElement(s, selElId));
+          updateSlide((s) => func.removeElement(s, selElId));
           setSelElId('');
         }
         break;
       }
       case 'Изменить фон': {
-        if (slide) updateSlide((s) => fns.changeBackground(s, tpl.backgroundTemplate));
+        if (slide) updateSlide((s) => func.changeBackground(s, temp.backgroundTemplate));
         break;
       }
       case 'Переместить слайд': {
         if (pres.slides.length > 1 && selSlideId) {
           const idx = pres.slides.findIndex((s) => s.id === selSlideId);
           const newIdx = (idx + 1) % pres.slides.length;
-          setPres(fns.moveSlide(pres, selSlideId, newIdx));
+          setPres(func.moveSlide(pres, selSlideId, newIdx));
         }
         break;
       }
       case 'Изменить текст': {
-        if (slide && selElId) updateSlide((s) => fns.changeText(s, selElId, tpl.newTextContent));
+        if (slide && selElId) updateSlide((s) => func.changeText(s, selElId, temp.newTextContent));
         break;
       }
       case 'Изменить размер текста': {
-        if (slide && selElId) updateSlide((s) => fns.changeTextSize(s, selElId, tpl.newFontSize));
+        if (slide && selElId) updateSlide((s) => func.changeTextSize(s, selElId, temp.newFontSize));
         break;
       }
       case 'Изменить шрифт': {
-        if (slide && selElId) updateSlide((s) => fns.changeTextFont(s, selElId, tpl.newFont));
+        if (slide && selElId) updateSlide((s) => func.changeTextFont(s, selElId, temp.newFont));
         break;
       }
       case 'Изменить позицию элемента': {
         if (slide && selElId)
-          updateSlide((s) => fns.changeElementPosition(s, selElId, tpl.newPosition));
+          updateSlide((s) => func.changeElementPosition(s, selElId, temp.newPosition));
         break;
       }
       case 'Изменить размер элемента': {
-        if (slide && selElId) updateSlide((s) => fns.changeElementSize(s, selElId, tpl.newSize));
+        if (slide && selElId) updateSlide((s) => func.changeElementSize(s, selElId, temp.newSize));
         break;
       }
     }
   };
 
-  // Изменение названия презентации
+  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.currentTarget.blur();
+    }
+  };
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
-    setPres(fns.changeTitle(pres, newTitle));
+    setPres((prev) => ({ ...prev, title: newTitle }));
+  };
+
+  const handleTitleCommit = (e: React.FocusEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    setPres(func.changeTitle(pres, newTitle));
     console.log('Новое название презентации:', newTitle);
   };
 
-  // Выбор слайда
   const handleSlideClick = (slideId: string, index: number) => {
     setSelSlideId(slideId);
     setSelElId('');
     console.log('ID слайда:', slideId, 'Порядковый номер:', index + 1);
   };
 
-  // Выбор элемента на слайде
-  const handleElementClick = (elementId: string, backgroundColor: string, slideId: string) => {
+  const handleElementClick = (elementId: string) => {
     setSelElId(elementId);
-    setSelSlideId(slideId);
     console.log('ID элемента:', elementId);
   };
 
   return (
     <div className="container">
-      {/* Заголовок и инфо о презентации */}
       <div className="presentation-info top">
         <h3>Презентация: {pres.title}</h3>
-        <input value={pres.title} onChange={handleTitleChange} placeholder="Название презентации" />
+        <input
+          value={pres.title}
+          onChange={handleTitleChange}
+          onBlur={handleTitleCommit}
+          onKeyDown={handleTitleKeyDown}
+        />
         <p>
           Слайдов: {pres.slides.length} | Выбран: {selSlideId || 'нет'}
         </p>
       </div>
 
-      {/* Панель действий (тулбар) */}
       <div className="header toolbar-split">
         <div className="toolbar-group">
           <button onClick={() => handleAction('Добавить слайд')}>➕ Слайд</button>
@@ -155,9 +161,7 @@ function App() {
         </div>
       </div>
 
-      {/* Основной layout */}
       <div className="main-content">
-        {/* Левая панель со слайдами */}
         <div className="slides-panel">
           <h3>Слайды</h3>
           <div className="slides-container">
@@ -165,46 +169,14 @@ function App() {
               <div
                 key={s.id}
                 onClick={() => handleSlideClick(s.id, i)}
-                className={`slide ${selSlideId === s.id ? 'selected' : ''}`}
+                className={`simple-slide ${selSlideId === s.id ? 'selected' : ''}`}
               >
-                {/* Мини-превью слайда */}
-                <div
-                  className="slide-thumbnail"
-                  style={{
-                    backgroundColor: s.background.type === 'color' ? s.background.value : 'white',
-                  }}
-                >
-                  {s.elements.map((el) => {
-                    const textEl = el as TextElement;
-                    const bg = el.type === 'text' ? textEl.color : '#e0e0e0';
-                    return (
-                      <div
-                        key={el.id}
-                        className="thumb-element"
-                        style={{
-                          left: el.position.x / 4,
-                          top: el.position.y / 4,
-                          width: el.size.width / 4,
-                          height: el.size.height / 4,
-                          backgroundColor: bg,
-                          font:
-                            el.type === 'text'
-                              ? `${Math.max(8, textEl.fontSize / 4)}px ${textEl.font}`
-                              : '10px Arial',
-                        }}
-                      >
-                        {el.type === 'text' ? textEl.content : '🖼️'}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="slide-index">Слайд {i + 1}</div>
+                Слайд {i + 1}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Центральная рабочая область */}
         <div className="workspace-panel">
           <h3>Рабочая область</h3>
           <div className="workspace">
@@ -222,7 +194,7 @@ function App() {
                   return (
                     <div
                       key={el.id}
-                      onClick={() => handleElementClick(el.id, backgroundColor, slide.id)}
+                      onClick={() => handleElementClick(el.id)}
                       className={`element ${selElId === el.id ? 'selected' : ''}`}
                       style={{
                         left: el.position.x,

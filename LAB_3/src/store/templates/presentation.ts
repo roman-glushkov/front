@@ -1,6 +1,5 @@
 import { Slide, TextElement, ImageElement, Background } from '../types/presentation';
 
-// Шаблоны для создания новых элементов
 export const slideTemplate: Slide = {
   id: '',
   background: { type: 'color', value: '#FFFFFF' },
@@ -31,14 +30,12 @@ export const backgroundTemplate: Background = {
   value: '#0026ffff',
 };
 
-// Позиции и размеры для изменений
 export const newPosition = { x: 200, y: 200 };
 export const newSize = { width: 200, height: 100 };
 export const newTextContent = 'Измененный текст';
 export const newFontSize = 20;
 export const newFont = 'Verdana';
 
-// Вспомогательные функции для создания элементов с уникальными ID
 export const createSlide = (): Slide => ({
   ...slideTemplate,
   id: `slide${Date.now()}`,

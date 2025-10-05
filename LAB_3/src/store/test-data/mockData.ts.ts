@@ -15,8 +15,6 @@ import {
   changeBackground,
 } from '../functions/presentation';
 
-//минимальные тестируемые данные
-
 export const minimalSlide: Slide = {
   id: 'slide1',
   background: { type: 'none' },
@@ -30,7 +28,6 @@ const minimalPresentation: Presentation = {
   selectedSlideIds: [],
 };
 
-//максимальные тестируемыеы данные
 const maximalTextElement1: TextElement = {
   type: 'text',
   id: 'text1',
@@ -94,18 +91,14 @@ const maximalPresentation: Presentation = {
   selectedSlideIds: ['slide1', 'slide2'],
 };
 
-//тест функций минимальными данными
-
 console.log('TЕСТИРОВАНИЕ ФУНКЦИЙ ПРЕЗЕНТАЦИИ');
 console.log('\nТЕСТИРОВАНИЕ С МИНИМАЛЬНЫМИ ДАННЫМИ');
 
-//
 const minimalAfterTitleChange = changeTitle(minimalPresentation, 'New Minimal Title');
 console.log('\nИзменение названия презентации');
 console.log(`   До: "${minimalPresentation.title}"`);
 console.log(`   После: "${minimalAfterTitleChange.title}"`);
 
-//
 const newMinimalSlide: Slide = {
   id: 'slide2',
   background: { type: 'none' },
@@ -116,19 +109,16 @@ console.log('\nДобавление нового слайда');
 console.log(`   До: ${minimalPresentation.slides.length} слайдов`);
 console.log(`   После: ${minimalAfterAddSlide.slides.length} слайдов`);
 
-//
 const minimalAfterRemoveSlide = removeSlide(minimalPresentation, 'slide1');
 console.log('\nУдаление слайда');
 console.log(`   До: ${minimalPresentation.slides.length} слайдов`);
 console.log(`   После: ${minimalAfterRemoveSlide.slides.length} слайдов`);
 
-//
 const minimalAfterMoveSlide = moveSlide(minimalAfterAddSlide, 'slide2', 0);
 console.log('\nПеремещение слайда');
 console.log(`   До: Первый слайд: ${minimalAfterAddSlide.slides[0].id}`);
 console.log(`   После: Первый слайд: ${minimalAfterMoveSlide.slides[0].id}`);
 
-//
 const minimalTextElement: TextElement = {
   type: 'text',
   id: 'text1',
@@ -144,7 +134,6 @@ console.log('\nДобавление текста на слайд');
 console.log(`   До: ${minimalSlide.elements.length} элементов`);
 console.log(`   После: ${minimalSlideWithText.elements.length} элементов`);
 
-//
 const minimalImageElement: ImageElement = {
   type: 'image',
   id: 'img1',
@@ -157,7 +146,6 @@ console.log('\nДобавление изображения на слайд');
 console.log(`   До: ${minimalSlide.elements.length} элементов`);
 console.log(`   После: ${minimalSlideWithImage.elements.length} элементов`);
 
-//
 const minimalSlideWithElements = addText(
   addImage(minimalSlide, minimalImageElement),
   minimalTextElement
@@ -167,7 +155,6 @@ console.log('\nУдаление элемента со слайда');
 console.log(`   До: ${minimalSlideWithElements.elements.length} элементов`);
 console.log(`   После: ${minimalAfterRemoveElement.elements.length} элементов`);
 
-//
 const minimalAfterPositionChange = changeElementPosition(minimalSlideWithText, 'text1', {
   x: 100,
   y: 100,
@@ -177,7 +164,6 @@ console.log('\nИзменение позиции элемента');
 console.log(`   До: x: 0, y: 0`);
 console.log(`   После: x: ${element?.position.x}, y: ${element?.position.y}`);
 
-//
 const minimalAfterSizeChange = changeElementSize(minimalSlideWithText, 'text1', {
   width: 200,
   height: 100,
@@ -187,14 +173,12 @@ console.log('\nИзменение размера элемента');
 console.log(`   До: width: 50, height: 20`);
 console.log(`   После: width: ${sizedElement?.size.width}, height: ${sizedElement?.size.height}`);
 
-//
 const minimalAfterTextChange = changeText(minimalSlideWithText, 'text1', 'Updated Minimal Text');
 const textElement = minimalAfterTextChange.elements.find((el) => el.id === 'text1') as TextElement;
 console.log('\nИзменение текста элемента');
 console.log(`   До: "Minimal Text"`);
 console.log(`   После: "${textElement?.content}"`);
 
-//
 const minimalAfterFontSizeChange = changeTextSize(minimalSlideWithText, 'text1', 24);
 const fontSizeElement = minimalAfterFontSizeChange.elements.find(
   (el) => el.id === 'text1'
@@ -203,14 +187,12 @@ console.log('\nИзменение размера шрифта');
 console.log(`   До: 12px`);
 console.log(`   После: ${fontSizeElement?.fontSize}px`);
 
-//
 const minimalAfterFontChange = changeTextFont(minimalSlideWithText, 'text1', 'Verdana');
 const fontElement = minimalAfterFontChange.elements.find((el) => el.id === 'text1') as TextElement;
 console.log('\nИзменение шрифта текста');
 console.log(`   До: "Arial"`);
 console.log(`   После: "${fontElement?.font}"`);
 
-//
 const minimalAfterBackgroundChange = changeBackground(minimalSlide, {
   type: 'color',
   value: '#FF0000',
@@ -227,13 +209,11 @@ console.log(
 
 console.log('\nТЕСТИРОВАНИЕ С МАКСИМАЛЬНЫМИ ДАННЫМИ');
 
-//
 const maximalAfterTitleChange = changeTitle(maximalPresentation, 'New Maximal Title');
 console.log('\nИзменение названия презентации');
 console.log(`   До: "${maximalPresentation.title}"`);
 console.log(`   После: "${maximalAfterTitleChange.title}"`);
 
-//
 const newMaximalSlide: Slide = {
   id: 'slide4',
   background: { type: 'color', value: '#00FF00' },
@@ -244,7 +224,6 @@ console.log('\nДобавление нового слайда');
 console.log(`   До: ${maximalPresentation.slides.length} слайдов`);
 console.log(`   После: ${maximalAfterAddSlide.slides.length} слайдов`);
 
-//
 const maximalAfterRemoveSlide = removeSlide(maximalPresentation, 'slide2');
 console.log('\nУдаление слайда');
 console.log(
@@ -258,13 +237,11 @@ console.log(
   } слайдов (${maximalAfterRemoveSlide.slides.map((s) => s.id).join(', ')})`
 );
 
-//
 const maximalAfterMoveSlide = moveSlide(maximalPresentation, 'slide3', 0);
 console.log('\nПеремещение слайда');
 console.log(`   До: Порядок: ${maximalPresentation.slides.map((s) => s.id).join(' → ')}`);
 console.log(`   После: Порядок: ${maximalAfterMoveSlide.slides.map((s) => s.id).join(' → ')}`);
 
-//
 const newTextElement: TextElement = {
   type: 'text',
   id: 'text3',
@@ -280,7 +257,6 @@ console.log('\nДобавление текста на слайд');
 console.log(`   До: ${maximalSlide1.elements.length} элементов`);
 console.log(`   После: ${maximalSlideWithText.elements.length} элементов`);
 
-//
 const newImageElement: ImageElement = {
   type: 'image',
   id: 'img3',
@@ -293,7 +269,6 @@ console.log('\nДобавление изображения на слайд');
 console.log(`   До: ${maximalSlide1.elements.length} элементов`);
 console.log(`   После: ${maximalSlideWithImage.elements.length} элементов`);
 
-//
 const maximalAfterRemoveElement = removeElement(maximalSlide1, 'text1');
 console.log('\nУдаление элемента со слайда');
 console.log(
@@ -307,14 +282,12 @@ console.log(
   } элементов (${maximalAfterRemoveElement.elements.map((el) => el.id).join(', ')})`
 );
 
-//
 const maximalAfterPositionChange = changeElementPosition(maximalSlide1, 'img1', { x: 300, y: 200 });
 const maximalElement = maximalAfterPositionChange.elements.find((el) => el.id === 'img1');
 console.log('\nИзменение позиции элемента');
 console.log(`   До: x: 50, y: 60`);
 console.log(`   После: x: ${maximalElement?.position.x}, y: ${maximalElement?.position.y}`);
 
-//
 const maximalAfterSizeChange = changeElementSize(maximalSlide1, 'text1', {
   width: 300,
   height: 80,
@@ -326,7 +299,6 @@ console.log(
   `   После: width: ${maximalSizedElement?.size.width}, height: ${maximalSizedElement?.size.height}`
 );
 
-//
 const maximalAfterTextChange = changeText(maximalSlide1, 'text1', 'Updated Maximal Text');
 const maximalTextElement = maximalAfterTextChange.elements.find(
   (el) => el.id === 'text1'
@@ -335,7 +307,6 @@ console.log('\nИзменение текста элемента');
 console.log(`   До: "Hello World"`);
 console.log(`   После: "${maximalTextElement?.content}"`);
 
-//
 const maximalAfterFontSizeChange = changeTextSize(maximalSlide1, 'text1', 32);
 const maximalFontSizeElement = maximalAfterFontSizeChange.elements.find(
   (el) => el.id === 'text1'
@@ -344,7 +315,6 @@ console.log('\nИзменение размера шрифта');
 console.log(`   До: 16px`);
 console.log(`   После: ${maximalFontSizeElement?.fontSize}px`);
 
-//
 const maximalAfterFontChange = changeTextFont(maximalSlide1, 'text1', 'Georgia');
 const maximalFontElement = maximalAfterFontChange.elements.find(
   (el) => el.id === 'text1'
@@ -353,7 +323,6 @@ console.log('\nИзменение шрифта текста');
 console.log(`   До: "Arial"`);
 console.log(`   После: "${maximalFontElement?.font}"`);
 
-//
 const maximalAfterBackgroundChange = changeBackground(maximalSlide1, {
   type: 'image',
   value: 'new-bg.jpg',
