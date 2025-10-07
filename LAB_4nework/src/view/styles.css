@@ -1,0 +1,58 @@
+.container {
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2ebf0 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.presentation-info.top {
+  background: linear-gradient(135deg, #c7d2fe 0%, #e0f2fe 100%);
+  padding: 16px 24px;
+  border-bottom: 2px solid #93c5fd;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+}
+
+.presentation-info.top h3 {
+  color: #1d4ed8;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.presentation-info.top input {
+  margin-bottom: 8px;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.slides-panel,
+.workspace-panel,
+.tools-panel {
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.slides-panel {
+  width: 260px;
+  overflow-y: auto;
+}
+
+.workspace-panel {
+  flex: 1;
+}
