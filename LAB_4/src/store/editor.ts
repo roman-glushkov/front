@@ -94,15 +94,15 @@ export function useEditor() {
     }
   };
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    setPres((prev) => ({ ...prev, title: newTitle }));
+  };
+
   const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.currentTarget.blur();
     }
-  };
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newTitle = e.target.value;
-    setPres((prev) => ({ ...prev, title: newTitle }));
   };
 
   const handleTitleCommit = (e: React.FocusEvent<HTMLInputElement>) => {
