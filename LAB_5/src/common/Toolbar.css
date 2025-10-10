@@ -1,16 +1,49 @@
-.header.toolbar-split {
+.toolbar-container {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
   background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
   padding: 12px 20px;
   color: #fff;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
 
+.toolbar-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid rgb(255 255 255 / 15%);
+}
+
+.toolbar-tab {
+  background: transparent;
+  border: none;
+  color: #dbeafe;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 0;
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  transition: all 0.2s ease;
+}
+
+.toolbar-tab:hover {
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+}
+
+.toolbar-tab.active {
+  background: #1e40af;
+  color: #fff;
+  box-shadow: 0 -2px 6px rgb(0 0 0 / 15%) inset;
+}
+
 .toolbar-group {
   display: flex;
   gap: 10px;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .toolbar-group button {
@@ -18,7 +51,9 @@
   color: #1f2937;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
-  padding: 6px 14px;
+  padding: 8px 0;
+  width: 120px;
+  text-align: center;
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -28,4 +63,5 @@
 .toolbar-group button:hover {
   background: linear-gradient(180deg, #f3f4f6 0%, #e0f2fe 100%);
   border-color: #93c5fd;
+  transform: translateY(-1px);
 }

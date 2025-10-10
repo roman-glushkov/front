@@ -17,12 +17,14 @@ export const textElementTemplate: TextElement = {
   color: '#ffffffff',
 };
 
+import placeholder from '../../assets/react.jpg';
+
 export const imageElementTemplate: ImageElement = {
   type: 'image',
   id: '',
-  src: 'image.jpg',
+  src: placeholder,
   position: { x: 100, y: 100 },
-  size: { width: 200, height: 150 },
+  size: { width: 0, height: 0 },
 };
 
 export const backgroundTemplate: Background = {
@@ -32,7 +34,6 @@ export const backgroundTemplate: Background = {
 
 export const newPosition = { x: 200, y: 200 };
 export const newSize = { width: 200, height: 100 };
-export const newTextContent = 'Измененный текст';
 export const newFontSize = 20;
 export const newFont = 'Verdana';
 

@@ -13,11 +13,16 @@ function App() {
     selElId,
     slide,
     handleAction,
-    handleTitleChange,
-    handleTitleCommit,
-    handleTitleKeyDown,
+    handleTextChange,
+    handleTextCommit,
+    handleTextKeyDown,
     handleSlideClick,
     handleElementClick,
+    handleTitleKeyDown,
+    handleTitleCommit,
+    handleTitleChange,
+    updateSlide,
+    setSelElId,
   } = useEditor();
 
   return (
@@ -39,7 +44,16 @@ function App() {
           onSlideClick={handleSlideClick}
         />
 
-        <Workspace slide={slide} selElId={selElId} onElementClick={handleElementClick} />
+        <Workspace
+          slide={slide}
+          selElId={selElId}
+          onElementClick={handleElementClick}
+          setSelElId={setSelElId}
+          updateSlide={updateSlide}
+          handleTextChange={handleTextChange}
+          handleTextCommit={handleTextCommit}
+          handleTextKeyDown={handleTextKeyDown}
+        />
       </div>
     </div>
   );

@@ -25,7 +25,6 @@
   width: 100%;
   max-width: 960px;
   background: #fff;
-  border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
@@ -33,22 +32,29 @@
 
 .element {
   position: absolute;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  border: none;
   cursor: pointer;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 4px;
-  transition: all 0.2s ease;
+  transition: border 0.2s ease;
+  border: 1px solid #c4c6c8;
+}
+
+.element[type='text'] {
+  border: 1px solid #d1d5db;
+}
+
+.element[type='image'] {
+  border: none;
 }
 
 .element:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 2px 6px rgb(59 130 246 / 30%);
+  border-color: inherit;
+  box-shadow: none;
 }
 
 .element.selected {
-  border: 2px solid #2563eb;
+  border: 2px solid #2563eb !important;
 }

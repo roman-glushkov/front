@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Presentation, Slide } from './types/presentation';
 import * as func from './functions/presentation';
 import * as temp from './templates/presentation';
+import { slideTitleAndText } from './templates/slide';
 
-const initialPresentation: Presentation = {
+export const initialPresentation: Presentation = {
   title: 'Новая презентация',
-  slides: [],
-  currentSlideId: '',
-  selectedSlideIds: [],
+  slides: [slideTitleAndText],
+  currentSlideId: 'slide1',
+  selectedSlideIds: ['slide1'],
 };
 
 export function useEditor() {
@@ -70,10 +71,6 @@ export function useEditor() {
         }
         break;
       }
-      case 'Изменить текст': {
-        if (slide && selElId) updateSlide((s) => func.changeText(s, selElId, temp.newTextContent));
-        break;
-      }
       case 'Изменить размер текста': {
         if (slide && selElId) updateSlide((s) => func.changeTextSize(s, selElId, temp.newFontSize));
         break;
@@ -94,12 +91,6 @@ export function useEditor() {
     }
   };
 
-  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.currentTarget.blur();
-    }
-  };
-
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setPres((prev) => ({ ...prev, title: newTitle }));
@@ -107,8 +98,26 @@ export function useEditor() {
 
   const handleTitleCommit = (e: React.FocusEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
-    setPres(func.changeTitle(pres, newTitle));
     console.log('Новое название презентации:', newTitle);
+  };
+
+  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') e.currentTarget.blur();
+  };
+
+  const handleTextKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') e.currentTarget.blur();
+  };
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>, elId: string) => {
+    const newValue = e.target.value;
+    updateSlide((s) => func.changeText(s, elId, newValue));
+  };
+
+  const handleTextCommit = (e: React.FocusEvent<HTMLInputElement>, elId: string) => {
+    const newValue = e.target.value;
+    updateSlide((s) => func.changeText(s, elId, newValue));
+    console.log('Новое содержимое текста:', newValue);
   };
 
   const handleSlideClick = (slideId: string, index: number) => {
@@ -128,10 +137,15 @@ export function useEditor() {
     selElId,
     slide,
     handleAction,
-    handleTitleChange,
-    handleTitleCommit,
-    handleTitleKeyDown,
+    handleTextChange,
+    handleTextCommit,
+    handleTextKeyDown,
     handleSlideClick,
     handleElementClick,
+    handleTitleKeyDown,
+    handleTitleCommit,
+    handleTitleChange,
+    updateSlide,
+    setSelElId,
   };
 }
