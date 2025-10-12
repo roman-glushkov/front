@@ -65,3 +65,54 @@
   border-color: #93c5fd;
   transform: translateY(-1px);
 }
+
+.toolbar-button-wrapper {
+  position: relative;
+}
+
+.template-popup {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 10px;
+  z-index: 20;
+  animation: popupFade 0.15s ease-out;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.template-btn {
+  background: linear-gradient(180deg, #e0e7ff 0%, #c7d2fe 100%);
+  border: 1px solid #93c5fd;
+  color: #1e3a8a;
+  border-radius: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.template-btn:hover {
+  background: #2563eb;
+  color: #205cff;
+  border-color: #60a5fa;
+  transform: translateY(-1px);
+}

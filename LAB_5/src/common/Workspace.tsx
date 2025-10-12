@@ -11,6 +11,7 @@ interface Props {
   handleTextChange: (e: React.ChangeEvent<HTMLInputElement>, elId: string) => void;
   handleTextCommit: (e: React.FocusEvent<HTMLInputElement>, elId: string) => void;
   handleTextKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, elId: string) => void;
+  preview?: boolean;
 }
 
 export default function Workspace({
@@ -25,7 +26,6 @@ export default function Workspace({
 
   return (
     <div className="workspace-panel">
-      <h3>Рабочая область</h3>
       <div className="workspace">
         {slide ? (
           <div

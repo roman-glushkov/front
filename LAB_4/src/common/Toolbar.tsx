@@ -4,7 +4,7 @@ import './Toolbar.css';
 interface Props {
   onAction: (action: string) => void;
 }
-
+// ul li
 export default function Toolbar({ onAction }: Props) {
   return (
     <div className="header toolbar-split">

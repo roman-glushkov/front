@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Presentation, Slide } from './types/presentation';
 import * as func from './functions/presentation';
 import * as temp from './templates/presentation';
-import { slideTitleAndText } from './templates/slide';
+import * as sld from './templates/slide';
 
 export const initialPresentation: Presentation = {
   title: 'Новая презентация',
-  slides: [slideTitleAndText],
+  slides: [sld.slideTitle],
   currentSlideId: 'slide1',
   selectedSlideIds: ['slide1'],
 };
@@ -29,13 +29,25 @@ export function useEditor() {
   const handleAction = (action: string) => {
     console.log('Совершенное действие:', action);
 
+    const slideMap: Record<string, Slide> = {
+      'Добавить Титульный слайд': sld.slideTitle,
+      'Добавить Заголовок и объект': sld.slideTitleAndObject,
+      'Добавить Заголовок раздела': sld.slideSectionHeader,
+      'Добавить Два объекта': sld.slideTwoObjects,
+      'Добавить Сравнение': sld.slideСomparison,
+      'Добавить Только заголовок': sld.slideJustHeadline,
+      'Добавить Пустой слайд': sld.slideEmpty,
+      'Добавить Объект с подписью': sld.slideObjectWithSignature,
+      'Добавить Рисунок с подписью': sld.slideDrawingWithCaption,
+    };
+    if (slideMap[action]) {
+      const baseSlide = slideMap[action];
+      const newSlide: Slide = { ...baseSlide, id: `slide${Date.now()}` };
+      setPres(func.addSlide(pres, newSlide));
+      setSelSlideId(newSlide.id);
+    }
+
     switch (action) {
-      case 'Добавить слайд': {
-        const newSlide = temp.createSlide();
-        setPres(func.addSlide(pres, newSlide));
-        setSelSlideId(newSlide.id);
-        break;
-      }
       case 'Удалить слайд': {
         if (!selSlideId) return;
         const updated = func.removeSlide(pres, selSlideId);

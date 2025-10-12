@@ -8,6 +8,7 @@ interface Props {
   onElementClick: (elementId: string) => void;
 }
 
+// main
 export default function Workspace({ slide, selElId, onElementClick }: Props) {
   return (
     <div className="workspace-panel">

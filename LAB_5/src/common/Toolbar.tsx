@@ -14,6 +14,16 @@ interface GroupButton {
 
 export default function Toolbar({ onAction }: Props) {
   const [activeGroup, setActiveGroup] = useState<GroupKey>('slides');
+  const [showTemplates, setShowTemplates] = useState(false);
+
+  const handleAddSlideClick = () => {
+    setShowTemplates(!showTemplates);
+  };
+
+  const handleTemplateSelect = (template: string) => {
+    onAction(template);
+    setShowTemplates(false);
+  };
 
   const groups: Record<GroupKey, GroupButton[]> = {
     slides: [
@@ -42,6 +52,18 @@ export default function Toolbar({ onAction }: Props) {
     { key: 'design', name: 'Дизайн' },
   ];
 
+  const templates = [
+    { label: '🏆 Титульный слайд', key: 'Добавить Титульный слайд' },
+    { label: '🧩 Заголовок и объект', key: 'Добавить Заголовок и объект' },
+    { label: '🏞️ Заголовок раздела', key: 'Добавить Заголовок раздела' },
+    { label: '💼 Два объекта', key: 'Добавить Два объекта' },
+    { label: '⚖️ Сравнение', key: 'Добавить Сравнение' },
+    { label: '📰 Только заголовок', key: 'Добавить Только заголовок' },
+    { label: '📄 Пустой слайд', key: 'Добавить Пустой слайд' },
+    { label: '🖋️ Объект с подписью', key: 'Добавить Объект с подписью' },
+    { label: '🌈 Рисунок с подписью', key: 'Добавить Рисунок с подписью' },
+  ];
+
   return (
     <div className="toolbar-container">
       <div className="toolbar-tabs">
@@ -49,7 +71,10 @@ export default function Toolbar({ onAction }: Props) {
           <button
             key={key}
             className={`toolbar-tab ${activeGroup === key ? 'active' : ''}`}
-            onClick={() => setActiveGroup(key)}
+            onClick={() => {
+              setActiveGroup(key);
+              setShowTemplates(false);
+            }}
           >
             {name}
           </button>
@@ -58,9 +83,29 @@ export default function Toolbar({ onAction }: Props) {
 
       <div className="toolbar-group">
         {groups[activeGroup].map(({ label, action }) => (
-          <button key={action} onClick={() => onAction(action)}>
-            {label}
-          </button>
+          <div key={action} className="toolbar-button-wrapper">
+            <button
+              onClick={() =>
+                action === 'Добавить слайд' ? handleAddSlideClick() : onAction(action)
+              }
+            >
+              {label}
+            </button>
+
+            {action === 'Добавить слайд' && showTemplates && (
+              <div className="template-popup">
+                {templates.map((t) => (
+                  <button
+                    key={t.key}
+                    className="template-btn"
+                    onClick={() => handleTemplateSelect(t.key)}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </div>
