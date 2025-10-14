@@ -109,3 +109,25 @@ export function changeTextFont(slide: Slide, elementId: string, newFont: string)
 export function changeBackground(slide: Slide, newBackground: Background): Slide {
   return { ...slide, background: { ...newBackground } };
 }
+
+export function changeTextColor(slide: Slide, elementId: string, color: string): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId ? { ...el, color } : el
+    ),
+  };
+}
+
+export function changeTextBackgroundColor(
+  slide: Slide,
+  elementId: string,
+  backgroundColor: string
+): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId ? { ...el, backgroundColor } : el
+    ),
+  };
+}

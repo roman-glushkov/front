@@ -34,7 +34,7 @@ export function useEditor() {
       'Добавить Заголовок и объект': sld.slideTitleAndObject,
       'Добавить Заголовок раздела': sld.slideSectionHeader,
       'Добавить Два объекта': sld.slideTwoObjects,
-      'Добавить Сравнение': sld.slideСomparison,
+      'Добавить Сравнение': sld.slideComparison,
       'Добавить Только заголовок': sld.slideJustHeadline,
       'Добавить Пустой слайд': sld.slideEmpty,
       'Добавить Объект с подписью': sld.slideObjectWithSignature,
@@ -45,6 +45,22 @@ export function useEditor() {
       const newSlide: Slide = { ...baseSlide, id: `slide${Date.now()}` };
       setPres(func.addSlide(pres, newSlide));
       setSelSlideId(newSlide.id);
+    }
+
+    if (action.startsWith('Изменить цвет текста:')) {
+      const color = action.split(':')[1].trim();
+      if (slide && selElId) {
+        updateSlide((s) => func.changeTextColor(s, selElId, color));
+      }
+      return;
+    }
+
+    if (action.startsWith('Изменить фон текста:')) {
+      const color = action.split(':')[1].trim();
+      if (slide && selElId) {
+        updateSlide((s) => func.changeTextBackgroundColor(s, selElId, color));
+      }
+      return;
     }
 
     switch (action) {

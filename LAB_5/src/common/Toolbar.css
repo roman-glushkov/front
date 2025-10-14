@@ -52,7 +52,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 6px;
   padding: 8px 0;
-  width: 120px;
+  width: 130px;
   text-align: center;
   font-size: 13px;
   cursor: pointer;
@@ -86,17 +86,6 @@
   animation: popupFade 0.15s ease-out;
 }
 
-@keyframes popupFade {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .template-btn {
   background: linear-gradient(180deg, #e0e7ff 0%, #c7d2fe 100%);
   border: 1px solid #93c5fd;
@@ -115,4 +104,71 @@
   color: #205cff;
   border-color: #60a5fa;
   transform: translateY(-1px);
+}
+
+.color-picker-popup {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+  padding: 12px 14px;
+  z-index: 30;
+  animation: popupFade 0.15s ease-out;
+  min-width: 260px;
+}
+
+.color-section {
+  margin-bottom: 10px;
+}
+
+.color-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgb(255 255 255 / 15%);
+  padding-bottom: 2px;
+}
+
+.theme-colors {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.theme-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.standard-colors {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.color-picker-popup .color-swatch {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  background-clip: padding-box;
+  background-image: none !important;
+  border: 1px solid rgb(255 255 255 / 25%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.color-picker-popup .color-swatch:hover {
+  transform: scale(1.25);
+  border-color: #fff;
+  box-shadow: 0 0 8px rgb(255 255 255 / 45%);
 }

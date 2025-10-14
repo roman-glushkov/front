@@ -14,7 +14,7 @@ export const textElementTemplate: TextElement = {
   size: { width: 200, height: 30 },
   font: 'Arial',
   fontSize: 16,
-  color: '#ffffffff',
+  color: '#000000ff',
 };
 
 import placeholder from '../../assets/react.jpg';

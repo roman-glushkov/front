@@ -35,31 +35,33 @@ export default function Workspace({
             }}
           >
             {slide.elements.map((el) => {
-              const textEl = el as TextElement;
-              const imageEl = el as ImageElement;
-              const backgroundColor = el.type === 'text' ? textEl.color : '#e0e0e0';
-              const isEditing = editingElId === el.id;
+              if (el.type === 'text') {
+                const textEl = el as TextElement;
+                const isEditing = editingElId === el.id;
 
-              return (
-                <div
-                  key={el.id}
-                  className={`element ${selElId === el.id ? 'selected' : ''}`}
-                  onClick={() => setSelElId(el.id)}
-                  onDoubleClick={() => {
-                    if (el.type === 'text') setEditingElId(el.id);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    left: el.position.x,
-                    top: el.position.y,
-                    width: el.size.width,
-                    height: el.size.height,
-                    backgroundColor,
-                    font: el.type === 'text' ? `${textEl.fontSize}px ${textEl.font}` : '16px Arial',
-                  }}
-                >
-                  {el.type === 'text' ? (
-                    isEditing ? (
+                return (
+                  <div
+                    key={el.id}
+                    className={`element ${selElId === el.id ? 'selected' : ''}`}
+                    onClick={() => setSelElId(el.id)}
+                    onDoubleClick={() => setEditingElId(el.id)}
+                    style={{
+                      position: 'absolute',
+                      left: el.position.x,
+                      top: el.position.y,
+                      width: el.size.width,
+                      height: el.size.height,
+                      fontFamily: textEl.font,
+                      fontSize: textEl.fontSize,
+                      color: textEl.color || '#1f2937',
+                      backgroundColor: textEl.backgroundColor || 'transparent',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {isEditing ? (
                       <input
                         autoFocus
                         value={textEl.content}
@@ -72,22 +74,44 @@ export default function Workspace({
                         style={{
                           width: '100%',
                           height: '100%',
-                          color: '#1f2937',
+                          color: textEl.color || '#1f2937',
+                          backgroundColor: textEl.backgroundColor || 'transparent',
+                          border: 'none',
+                          outline: 'none',
+                          textAlign: 'center',
+                          fontFamily: textEl.font,
+                          fontSize: textEl.fontSize,
                         }}
                       />
                     ) : (
                       textEl.content
-                    )
-                  ) : (
-                    <img
-                      src={imageEl.src}
-                      alt="Изображение"
-                      style={{
-                        width: imageEl.size.width === 0 ? 'auto' : '100%',
-                        height: imageEl.size.height === 0 ? 'auto' : '100%',
-                      }}
-                    />
-                  )}
+                    )}
+                  </div>
+                );
+              }
+
+              const imageEl = el as ImageElement;
+              return (
+                <div
+                  key={el.id}
+                  className={`element ${selElId === el.id ? 'selected' : ''}`}
+                  onClick={() => setSelElId(el.id)}
+                  style={{
+                    position: 'absolute',
+                    left: el.position.x,
+                    top: el.position.y,
+                    width: el.size.width,
+                    height: el.size.height,
+                  }}
+                >
+                  <img
+                    src={imageEl.src}
+                    alt="Изображение"
+                    style={{
+                      width: imageEl.size.width === 0 ? 'auto' : '100%',
+                      height: imageEl.size.height === 0 ? 'auto' : '100%',
+                    }}
+                  />
                 </div>
               );
             })}

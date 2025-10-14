@@ -45,6 +45,7 @@ export type TextElement = BaseElement & {
   font: string;
   fontSize: number;
   color: string;
+  backgroundColor?: string;
 };
 
 export type ImageElement = BaseElement & {
