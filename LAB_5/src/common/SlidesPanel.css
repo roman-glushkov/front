@@ -115,3 +115,8 @@
   background: none !important;
   box-shadow: none !important;
 }
+
+.slide-row.hovered {
+  outline: 2px dashed #0078ff;
+  background-color: rgb(0 120 255 / 5%);
+}

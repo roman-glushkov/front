@@ -91,29 +91,12 @@ export function useEditor() {
         if (slide) updateSlide((s) => func.changeBackground(s, temp.backgroundTemplate));
         break;
       }
-      case 'Переместить слайд': {
-        if (pres.slides.length > 1 && selSlideId) {
-          const idx = pres.slides.findIndex((s) => s.id === selSlideId);
-          const newIdx = (idx + 1) % pres.slides.length;
-          setPres(func.moveSlide(pres, selSlideId, newIdx));
-        }
-        break;
-      }
       case 'Изменить размер текста': {
         if (slide && selElId) updateSlide((s) => func.changeTextSize(s, selElId, temp.newFontSize));
         break;
       }
       case 'Изменить шрифт': {
         if (slide && selElId) updateSlide((s) => func.changeTextFont(s, selElId, temp.newFont));
-        break;
-      }
-      case 'Изменить позицию элемента': {
-        if (slide && selElId)
-          updateSlide((s) => func.changeElementPosition(s, selElId, temp.newPosition));
-        break;
-      }
-      case 'Изменить размер элемента': {
-        if (slide && selElId) updateSlide((s) => func.changeElementSize(s, selElId, temp.newSize));
         break;
       }
     }
