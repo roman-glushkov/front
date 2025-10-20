@@ -1,0 +1,39 @@
+import { TextElement, ImageElement, Background } from '../types/presentation';
+
+export const textElementTemplate: TextElement = {
+  type: 'text',
+  id: '',
+  content: 'Новый текст',
+  position: { x: 50, y: 50 },
+  size: { width: 200, height: 30 },
+  font: 'Arial',
+  fontSize: 16,
+  color: '#000000ff',
+};
+
+import placeholder from '../../assets/ts.jpg';
+
+export const imageElementTemplate: ImageElement = {
+  type: 'image',
+  id: '',
+  src: placeholder,
+  position: { x: 400, y: 300 },
+  size: { width: 400, height: 300 },
+};
+
+export const backgroundTemplate: Background = {
+  type: 'color',
+  value: '#0026ffff',
+};
+export const newFontSize = 20;
+export const newFont = 'Verdana';
+
+export const createTextElement = (): TextElement => ({
+  ...textElementTemplate,
+  id: `text${Date.now()}`,
+});
+
+export const createImageElement = (): ImageElement => ({
+  ...imageElementTemplate,
+  id: `img${Date.now()}`,
+});
