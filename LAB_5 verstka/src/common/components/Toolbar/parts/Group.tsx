@@ -9,11 +9,13 @@ interface Props {
   showTemplates: boolean;
   showTextColorPicker: boolean;
   showFillColorPicker: boolean;
+  showBackgroundColorPicker: boolean;
   handleAddSlideClick: () => void;
   handleTextColorClick: () => void;
   handleFillColorClick: () => void;
+  handleBackgroundColorClick: () => void;
   handleTemplateSelect: (template: string) => void;
-  handleColorSelect: (type: 'text' | 'fill', color: string) => void;
+  handleColorSelect: (type: 'text' | 'fill' | 'background', color: string) => void;
   onAction: (action: string) => void;
 }
 
@@ -22,9 +24,11 @@ export default function ToolbarGroup({
   showTemplates,
   showTextColorPicker,
   showFillColorPicker,
+  showBackgroundColorPicker,
   handleAddSlideClick,
   handleTextColorClick,
   handleFillColorClick,
+  handleBackgroundColorClick,
   handleTemplateSelect,
   handleColorSelect,
   onAction,
@@ -38,6 +42,7 @@ export default function ToolbarGroup({
               if (action === 'Добавить слайд') handleAddSlideClick();
               else if (action === 'Изменить цвет текста') handleTextColorClick();
               else if (action === 'Изменить фон текста') handleFillColorClick();
+              else if (action === 'Изменить фон слайда') handleBackgroundColorClick();
               else onAction(action);
             }}
           >
@@ -54,6 +59,10 @@ export default function ToolbarGroup({
 
           {action === 'Изменить фон текста' && showFillColorPicker && (
             <ColorSection type="fill" onSelect={handleColorSelect} />
+          )}
+
+          {action === 'Изменить фон слайда' && showBackgroundColorPicker && (
+            <ColorSection type="background" onSelect={handleColorSelect} />
           )}
         </div>
       ))}

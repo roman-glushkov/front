@@ -4,7 +4,7 @@ import ProjectTitle from './common/components/ProjectTitle';
 import Toolbar from './common/components/Toolbar';
 import SlidesPanel from './common/components/SlidesPanel';
 import Workspace from './common/components/Workspace';
-import './view/styles.css';
+import './common/view/styles.css';
 
 function App() {
   const {

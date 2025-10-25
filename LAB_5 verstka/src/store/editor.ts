@@ -62,6 +62,13 @@ export function useEditor() {
       }
       return;
     }
+    if (action.startsWith('Изменить фон слайда:')) {
+      const color = action.split(': ')[1];
+      updateSlide((slide) => ({
+        ...slide,
+        background: { type: 'color', value: color },
+      }));
+    }
 
     switch (action) {
       case 'Удалить слайд': {
@@ -85,10 +92,6 @@ export function useEditor() {
           updateSlide((s) => func.removeElement(s, selElId));
           setSelElId('');
         }
-        break;
-      }
-      case 'Изменить фон': {
-        if (slide) updateSlide((s) => func.changeBackground(s, temp.backgroundTemplate));
         break;
       }
       case 'Изменить размер текста': {

@@ -10,6 +10,8 @@ export function useToolbarLogic(onAction: (action: string) => void) {
     setShowTextColorPicker,
     showFillColorPicker,
     setShowFillColorPicker,
+    showBackgroundColorPicker,
+    setShowBackgroundColorPicker,
     resetPopups,
   } = useToolbarState();
 
@@ -35,13 +37,21 @@ export function useToolbarLogic(onAction: (action: string) => void) {
     setShowTextColorPicker(false);
     setShowTemplates(false);
   };
-
-  const handleColorSelect = (type: 'text' | 'fill', color: string) => {
-    if (type === 'text') onAction(`Изменить цвет текста: ${color}`);
-    else onAction(`Изменить фон текста: ${color}`);
-
+  const handleBackgroundColorClick = () => {
+    console.log('Toggle background picker');
+    setShowBackgroundColorPicker(!showBackgroundColorPicker);
     setShowTextColorPicker(false);
     setShowFillColorPicker(false);
+    setShowTemplates(false);
+  };
+
+  const handleColorSelect = (type: 'text' | 'fill' | 'background', color: string) => {
+    if (type === 'text') onAction(`Изменить цвет текста: ${color}`);
+    else if (type === 'fill') onAction(`Изменить фон текста: ${color}`);
+    else onAction(`Изменить фон слайда: ${color}`);
+    setShowTextColorPicker(false);
+    setShowFillColorPicker(false);
+    setShowBackgroundColorPicker(false);
   };
 
   return {
@@ -50,6 +60,7 @@ export function useToolbarLogic(onAction: (action: string) => void) {
       showTemplates,
       showTextColorPicker,
       showFillColorPicker,
+      showBackgroundColorPicker,
     },
     handlers: {
       setActiveGroup,
@@ -58,6 +69,7 @@ export function useToolbarLogic(onAction: (action: string) => void) {
       handleTemplateSelect,
       handleTextColorClick,
       handleFillColorClick,
+      handleBackgroundColorClick,
       handleColorSelect,
     },
   };

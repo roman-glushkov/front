@@ -1,4 +1,4 @@
-import { TextElement, ImageElement, Background } from '../types/presentation';
+import { TextElement, ImageElement } from '../types/presentation';
 
 export const textElementTemplate: TextElement = {
   type: 'text',
@@ -21,10 +21,6 @@ export const imageElementTemplate: ImageElement = {
   size: { width: 400, height: 300 },
 };
 
-export const backgroundTemplate: Background = {
-  type: 'color',
-  value: '#0026ffff',
-};
 export const newFontSize = 20;
 export const newFont = 'Verdana';
 

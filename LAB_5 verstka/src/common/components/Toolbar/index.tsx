@@ -24,9 +24,11 @@ export default function Toolbar({ onAction }: Props) {
         showTemplates={state.showTemplates}
         showTextColorPicker={state.showTextColorPicker}
         showFillColorPicker={state.showFillColorPicker}
+        showBackgroundColorPicker={state.showBackgroundColorPicker}
         handleAddSlideClick={handlers.handleAddSlideClick}
         handleTextColorClick={handlers.handleTextColorClick}
         handleFillColorClick={handlers.handleFillColorClick}
+        handleBackgroundColorClick={handlers.handleBackgroundColorClick}
         handleTemplateSelect={handlers.handleTemplateSelect}
         handleColorSelect={handlers.handleColorSelect}
         onAction={onAction}

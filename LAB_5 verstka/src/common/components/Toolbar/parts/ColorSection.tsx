@@ -1,10 +1,11 @@
 import React from 'react';
-import { THEME_COLUMNS, STANDARD_COLORS } from '../constants/colors';
+import { THEME_COLUMNS } from '../constants/colors';
+import { STANDARD_COLORS } from '../constants/templates';
 import ThemeColorButton from './ThemeButton';
 
 interface Props {
-  type: 'text' | 'fill';
-  onSelect: (type: 'text' | 'fill', color: string) => void;
+  type: 'text' | 'fill' | 'background';
+  onSelect: (type: 'text' | 'fill' | 'background', color: string) => void;
 }
 
 export default function ColorSection({ type, onSelect }: Props) {
