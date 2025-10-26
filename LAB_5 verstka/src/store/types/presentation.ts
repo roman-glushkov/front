@@ -5,6 +5,8 @@ export type Presentation = {
   selectedSlideIds: string[];
 };
 
+export type Corner = 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'w' | 'e';
+
 export type Slide = {
   id: string;
   background: Background;

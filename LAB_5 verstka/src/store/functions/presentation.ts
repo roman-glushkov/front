@@ -12,7 +12,11 @@ export function changeTitle(presentation: Presentation, newTitle: string): Prese
 }
 
 export function addSlide(presentation: Presentation, newSlide: Slide): Presentation {
-  return { ...presentation, slides: [...presentation.slides, { ...newSlide }] };
+  return {
+    ...presentation,
+    slides: [...presentation.slides, newSlide],
+    currentSlideId: newSlide.id, // автоматически переключаем на новый слайд
+  };
 }
 
 export function removeSlide(presentation: Presentation, slideId: string): Presentation {

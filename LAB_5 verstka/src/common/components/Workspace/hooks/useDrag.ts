@@ -1,23 +1,20 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import type { Slide, SlideElement } from '../../../../store/types/presentation';
 
 type UpdateSlideFn = (updater: (s: Slide) => Slide) => void;
 
 interface Args {
   preview?: boolean;
-  setSelElId: (id: string) => void;
-  bringToFront: (id: string) => void;
+  selElIdsRef: React.RefObject<string[]>;
   updateSlide: UpdateSlideFn;
+  getElementById: (id: string) => SlideElement | undefined;
 }
 
-export default function useDrag({ preview, setSelElId, bringToFront, updateSlide }: Args) {
+export default function useDrag({ preview, selElIdsRef, updateSlide, getElementById }: Args) {
   const dragStateRef = useRef<{
-    draggingId: string;
     startX: number;
     startY: number;
-    origX: number;
-    origY: number;
+    origPositions: Record<string, { x: number; y: number }>;
     raf?: number;
   } | null>(null);
 
@@ -25,34 +22,47 @@ export default function useDrag({ preview, setSelElId, bringToFront, updateSlide
     if (preview) return;
     e.stopPropagation();
 
-    setSelElId(el.id);
-    bringToFront(el.id);
+    // ✅ ВСЕГДА берём все выделенные элементы, если они есть
+    const selectedIds =
+      selElIdsRef.current && selElIdsRef.current.length > 0 ? selElIdsRef.current : [el.id];
 
-    const ds = {
-      draggingId: el.id,
+    const origPositions: Record<string, { x: number; y: number }> = {};
+    selectedIds.forEach((id) => {
+      const element = getElementById(id);
+      if (element) {
+        origPositions[id] = { x: element.position.x, y: element.position.y };
+      }
+    });
+
+    dragStateRef.current = {
       startX: e.clientX,
       startY: e.clientY,
-      origX: el.position.x,
-      origY: el.position.y,
+      origPositions,
     };
-    dragStateRef.current = ds;
 
     const onPointerMove = (ev: PointerEvent) => {
-      const cur = dragStateRef.current;
-      if (!cur) return;
+      const ds = dragStateRef.current;
+      if (!ds) return;
 
-      const dx = ev.clientX - cur.startX;
-      const dy = ev.clientY - cur.startY;
+      const dx = ev.clientX - ds.startX;
+      const dy = ev.clientY - ds.startY;
 
-      if (cur.raf) cancelAnimationFrame(cur.raf);
-      cur.raf = requestAnimationFrame(() => {
+      if (ds.raf) cancelAnimationFrame(ds.raf);
+      ds.raf = requestAnimationFrame(() => {
         updateSlide((s: Slide) => ({
           ...s,
-          elements: s.elements.map((item) =>
-            item.id === cur.draggingId
-              ? { ...item, position: { x: cur.origX + dx, y: cur.origY + dy } }
-              : item
-          ),
+          elements: s.elements.map((item) => {
+            if (ds.origPositions[item.id]) {
+              return {
+                ...item,
+                position: {
+                  x: ds.origPositions[item.id].x + dx,
+                  y: ds.origPositions[item.id].y + dy,
+                },
+              };
+            }
+            return item;
+          }),
         }));
       });
     };

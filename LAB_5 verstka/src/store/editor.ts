@@ -13,11 +13,13 @@ export const initialPresentation: Presentation = {
 
 export function useEditor() {
   const [pres, setPres] = useState(initialPresentation);
-  const [selSlideId, setSelSlideId] = useState('');
+  const [selSlideId, setSelSlideId] = useState(pres.slides[0]?.id || '');
+  const [selSlideIds, setSelSlideIds] = useState<string[]>([pres.slides[0]?.id || '']);
   const [selElId, setSelElId] = useState('');
 
   const slide = pres.slides.find((s) => s.id === selSlideId);
 
+  // === Обновление текущего слайда ===
   const updateSlide = (updater: (s: Slide) => Slide) => {
     if (!slide) return;
     setPres((prev) => ({
@@ -26,8 +28,24 @@ export function useEditor() {
     }));
   };
 
+  // === Клик по слайду (с поддержкой Ctrl для мультивыбора) ===
+  const handleSlideClick = (slideId: string, index: number, multi?: boolean) => {
+    if (multi) {
+      setSelSlideIds((prev) =>
+        prev.includes(slideId) ? prev.filter((id) => id !== slideId) : [...prev, slideId]
+      );
+    } else {
+      setSelSlideId(slideId);
+      setSelSlideIds([slideId]);
+      setSelElId(''); // сброс выбора элемента при смене слайда
+    }
+
+    console.log('Выбран слайд:', slideId, 'Номер:', index + 1);
+  };
+
+  // === Обработка действий ===
   const handleAction = (action: string) => {
-    console.log('Совершенное действие:', action);
+    console.log('Совершено действие:', action);
 
     const slideMap: Record<string, Slide> = {
       'Добавить Титульный слайд': sld.slideTitle,
@@ -40,34 +58,35 @@ export function useEditor() {
       'Добавить Объект с подписью': sld.slideObjectWithSignature,
       'Добавить Рисунок с подписью': sld.slideDrawingWithCaption,
     };
+
     if (slideMap[action]) {
       const baseSlide = slideMap[action];
       const newSlide: Slide = { ...baseSlide, id: `slide${Date.now()}` };
       setPres(func.addSlide(pres, newSlide));
       setSelSlideId(newSlide.id);
+      setSelSlideIds([newSlide.id]);
+      return;
     }
 
     if (action.startsWith('Изменить цвет текста:')) {
       const color = action.split(':')[1].trim();
-      if (slide && selElId) {
-        updateSlide((s) => func.changeTextColor(s, selElId, color));
-      }
+      if (slide && selElId) updateSlide((s) => func.changeTextColor(s, selElId, color));
       return;
     }
 
     if (action.startsWith('Изменить фон текста:')) {
       const color = action.split(':')[1].trim();
-      if (slide && selElId) {
-        updateSlide((s) => func.changeTextBackgroundColor(s, selElId, color));
-      }
+      if (slide && selElId) updateSlide((s) => func.changeTextBackgroundColor(s, selElId, color));
       return;
     }
+
     if (action.startsWith('Изменить фон слайда:')) {
       const color = action.split(': ')[1];
       updateSlide((slide) => ({
         ...slide,
         background: { type: 'color', value: color },
       }));
+      return;
     }
 
     switch (action) {
@@ -75,7 +94,9 @@ export function useEditor() {
         if (!selSlideId) return;
         const updated = func.removeSlide(pres, selSlideId);
         setPres(updated);
-        setSelSlideId(updated.slides[0]?.id || '');
+        const nextSlide = updated.slides[0]?.id || '';
+        setSelSlideId(nextSlide);
+        setSelSlideIds(nextSlide ? [nextSlide] : []);
         setSelElId('');
         break;
       }
@@ -105,20 +126,21 @@ export function useEditor() {
     }
   };
 
+  // === Работа с заголовком ===
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setPres((prev) => ({ ...prev, title: newTitle }));
   };
 
   const handleTitleCommit = (e: React.FocusEvent<HTMLInputElement>) => {
-    const newTitle = e.target.value;
-    console.log('Новое название презентации:', newTitle);
+    console.log('Новое название презентации:', e.target.value);
   };
 
   const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') e.currentTarget.blur();
   };
 
+  // === Работа с текстом ===
   const handleTextKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') e.currentTarget.blur();
   };
@@ -134,20 +156,15 @@ export function useEditor() {
     console.log('Новое содержимое текста:', newValue);
   };
 
-  const handleSlideClick = (slideId: string, index: number) => {
-    setSelSlideId(slideId);
-    setSelElId('');
-    console.log('ID слайда:', slideId, 'Порядковый номер:', index + 1);
-  };
-
   const handleElementClick = (elementId: string) => {
     setSelElId(elementId);
-    console.log('ID элемента:', elementId);
+    console.log('Выбран элемент:', elementId);
   };
 
   return {
     pres,
     selSlideId,
+    selSlideIds,
     selElId,
     slide,
     handleAction,
@@ -161,5 +178,6 @@ export function useEditor() {
     handleTitleChange,
     updateSlide,
     setSelElId,
+    setSelSlideIds,
   };
 }

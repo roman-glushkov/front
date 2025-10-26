@@ -9,7 +9,7 @@ interface Props {
   noopChange: () => void;
 }
 
-export function SlidePreview({ slide, scale, noop, noopChange }: Props) {
+export function SlidePreview({ slide, scale }: Props) {
   return (
     <div className="slide-preview-wrapper">
       <div
@@ -24,13 +24,12 @@ export function SlidePreview({ slide, scale, noop, noopChange }: Props) {
       >
         <Workspace
           slide={slide}
-          selElId=""
-          onElementClick={noop}
-          setSelElId={noop}
-          updateSlide={noopChange}
-          handleTextChange={noopChange}
-          handleTextCommit={noopChange}
-          handleTextKeyDown={noopChange}
+          selElIds={[]} // пустой массив выбранных элементов
+          setSelElIds={() => {}} // noop, т.к. превью не редактируем
+          updateSlide={() => {}} // noop
+          handleTextChange={() => {}}
+          handleTextCommit={() => {}}
+          handleTextKeyDown={() => {}}
           preview
         />
       </div>

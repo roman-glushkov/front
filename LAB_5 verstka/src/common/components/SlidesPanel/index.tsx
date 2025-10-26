@@ -1,19 +1,25 @@
 import React from 'react';
 import { Slide } from '../../../store/types/presentation';
-import { useSlidesLogic } from './hooks/useLogic';
 import SlidesContainer from './parts/Container';
+import { useSlidesLogic } from './hooks/useLogic';
 import './styles.css';
 
 interface Props {
   slides: Slide[];
   selectedSlideId: string;
-  onSlideClick: (slideId: string, index: number) => void;
+  selectedSlideIds: string[];
+  setSelectedSlideId: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>;
+  onSlideClick: (slideId: string, index: number, multi?: boolean) => void;
   onSlidesReorder?: (newOrder: Slide[]) => void;
 }
 
 export default function SlidesPanel({
   slides,
   selectedSlideId,
+  selectedSlideIds,
+  setSelectedSlideId,
+  setSelectedSlideIds,
   onSlideClick,
   onSlidesReorder,
 }: Props) {
@@ -25,7 +31,7 @@ export default function SlidesPanel({
     handleDragEnd,
     noop,
     noopChange,
-  } = useSlidesLogic(slides, onSlidesReorder);
+  } = useSlidesLogic({ slides, selectedSlideIds, setSelectedSlideIds, onSlidesReorder });
 
   return (
     <div className="slides-panel">
@@ -34,6 +40,9 @@ export default function SlidesPanel({
         slides={localSlides}
         hoverIndex={hoverIndex}
         selectedSlideId={selectedSlideId}
+        selectedSlideIds={selectedSlideIds}
+        setSelectedSlideId={setSelectedSlideId}
+        setSelectedSlideIds={setSelectedSlideIds}
         scale={0.25}
         onSlideClick={onSlideClick}
         handleDragStart={handleDragStart}

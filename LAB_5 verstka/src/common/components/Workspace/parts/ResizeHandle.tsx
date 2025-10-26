@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  corner: 'nw' | 'ne' | 'sw' | 'se';
+  corner: 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'w' | 'e';
   onPointerDown: (e: React.PointerEvent) => void;
 }
 

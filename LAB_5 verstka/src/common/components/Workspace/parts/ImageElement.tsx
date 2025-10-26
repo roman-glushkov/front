@@ -1,45 +1,35 @@
 import React from 'react';
 import { ImageElement as IEl, SlideElement } from '../../../../store/types/presentation';
-import ResizeHandle from './ResizeHandle';
+import BaseElementView from './BaseElement';
+
+type Corner = 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'w' | 'e';
 
 interface Props {
   el: IEl;
   isSelected: boolean;
   preview: boolean;
-  setSelElId: (id: string) => void;
+  setSelElIds: React.Dispatch<React.SetStateAction<string[]>>;
   startDrag: (e: React.PointerEvent, el: SlideElement) => void;
-  startResize: (e: React.PointerEvent, el: SlideElement, corner: 'nw' | 'ne' | 'sw' | 'se') => void;
+  startResize: (e: React.PointerEvent, el: SlideElement, corner: Corner) => void;
+  onPointerDown?: (e: React.PointerEvent) => void;
 }
 
 export default function ImageElementView({
   el,
   isSelected,
   preview,
-  setSelElId,
   startDrag,
   startResize,
+  onPointerDown,
 }: Props) {
   return (
-    <div
-      className={`element ${isSelected ? 'selected' : ''}`}
-      onClick={(e) => {
-        e.stopPropagation();
-        setSelElId(el.id);
-      }}
-      onPointerDown={(e) => startDrag(e, el)}
-      style={{
-        position: 'absolute',
-        left: el.position.x,
-        top: el.position.y,
-        width: el.size.width,
-        height: el.size.height,
-        cursor: preview ? 'default' : 'grab',
-        userSelect: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        pointerEvents: 'auto',
-      }}
+    <BaseElementView
+      el={el}
+      isSelected={isSelected}
+      preview={preview}
+      onPointerDown={onPointerDown}
+      startDrag={startDrag}
+      startResize={startResize}
     >
       <img
         src={el.src}
@@ -52,13 +42,6 @@ export default function ImageElementView({
           userSelect: 'none',
         }}
       />
-      {isSelected && !preview && (
-        <>
-          {(['nw', 'ne', 'sw', 'se'] as const).map((c) => (
-            <ResizeHandle key={c} corner={c} onPointerDown={(e) => startResize(e, el, c)} />
-          ))}
-        </>
-      )}
-    </div>
+    </BaseElementView>
   );
 }

@@ -38,7 +38,6 @@ export function useToolbarLogic(onAction: (action: string) => void) {
     setShowTemplates(false);
   };
   const handleBackgroundColorClick = () => {
-    console.log('Toggle background picker');
     setShowBackgroundColorPicker(!showBackgroundColorPicker);
     setShowTextColorPicker(false);
     setShowFillColorPicker(false);

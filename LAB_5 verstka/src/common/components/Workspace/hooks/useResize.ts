@@ -6,12 +6,10 @@ interface Args {
   updateSlide: (updater: (s: Slide) => Slide) => void;
 }
 
+type Corner = 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'w' | 'e';
+
 export default function useResize({ preview, updateSlide }: Args) {
-  const startResize = (
-    e: React.PointerEvent,
-    el: SlideElement,
-    corner: 'nw' | 'ne' | 'sw' | 'se'
-  ) => {
+  const startResize = (e: React.PointerEvent, el: SlideElement, corner: Corner) => {
     e.stopPropagation();
     if (preview) return;
 
@@ -56,6 +54,21 @@ export default function useResize({ preview, updateSlide }: Args) {
               newHeight = origHeight - dy;
               newX = origX + dx;
               newY = origY + dy;
+              break;
+
+            case 'n':
+              newHeight = origHeight - dy;
+              newY = origY + dy;
+              break;
+            case 's':
+              newHeight = origHeight + dy;
+              break;
+            case 'w':
+              newWidth = origWidth - dx;
+              newX = origX + dx;
+              break;
+            case 'e':
+              newWidth = origWidth + dx;
               break;
           }
 
