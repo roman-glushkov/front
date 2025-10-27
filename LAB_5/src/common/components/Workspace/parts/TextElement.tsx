@@ -9,7 +9,11 @@ interface Props {
   preview: boolean;
   setSelElId: (id: string) => void;
   startDrag: (e: React.PointerEvent, el: SlideElement) => void;
-  startResize: (e: React.PointerEvent, el: SlideElement, corner: 'nw' | 'ne' | 'sw' | 'se') => void;
+  startResize: (
+    e: React.PointerEvent,
+    el: SlideElement,
+    corner: 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'e' | 'w'
+  ) => void;
   handleTextChange: (e: React.ChangeEvent<HTMLInputElement>, elId: string) => void;
   handleTextCommit: (e: React.FocusEvent<HTMLInputElement>, elId: string) => void;
   handleTextKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, elId: string) => void;
@@ -27,7 +31,6 @@ export default function TextElementView({
   handleTextKeyDown,
 }: Props) {
   const [editingElIdLocal, setEditingElIdLocal] = useState('');
-
   const isEditingNow = editingElIdLocal === el.id && el.type === 'text';
 
   return (
@@ -48,10 +51,10 @@ export default function TextElementView({
         top: el.position.y,
         width: el.size.width,
         height: el.size.height,
-        fontFamily: (el as TEl).font,
-        fontSize: (el as TEl).fontSize,
-        color: (el as TEl).color || '#1f2937',
-        backgroundColor: (el as TEl).backgroundColor || 'transparent',
+        fontFamily: el.font,
+        fontSize: el.fontSize,
+        color: el.color || '#1f2937',
+        backgroundColor: el.backgroundColor || 'transparent',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -88,7 +91,7 @@ export default function TextElementView({
 
       {isSelected && !preview && (
         <>
-          {(['nw', 'ne', 'sw', 'se'] as const).map((c) => (
+          {(['nw', 'ne', 'sw', 'se', 'n', 's', 'e', 'w'] as const).map((c) => (
             <ResizeHandle key={c} corner={c} onPointerDown={(e) => startResize(e, el, c)} />
           ))}
         </>

@@ -8,7 +8,11 @@ interface Props {
   preview: boolean;
   setSelElId: (id: string) => void;
   startDrag: (e: React.PointerEvent, el: SlideElement) => void;
-  startResize: (e: React.PointerEvent, el: SlideElement, corner: 'nw' | 'ne' | 'sw' | 'se') => void;
+  startResize: (
+    e: React.PointerEvent,
+    el: SlideElement,
+    corner: 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'e' | 'w'
+  ) => void;
 }
 
 export default function ImageElementView({
@@ -54,7 +58,7 @@ export default function ImageElementView({
       />
       {isSelected && !preview && (
         <>
-          {(['nw', 'ne', 'sw', 'se'] as const).map((c) => (
+          {(['nw', 'ne', 'sw', 'se', 'n', 's', 'e', 'w'] as const).map((c) => (
             <ResizeHandle key={c} corner={c} onPointerDown={(e) => startResize(e, el, c)} />
           ))}
         </>

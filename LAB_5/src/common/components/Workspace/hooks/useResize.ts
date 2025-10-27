@@ -10,7 +10,7 @@ export default function useResize({ preview, updateSlide }: Args) {
   const startResize = (
     e: React.PointerEvent,
     el: SlideElement,
-    corner: 'nw' | 'ne' | 'sw' | 'se'
+    corner: 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'e' | 'w'
   ) => {
     e.stopPropagation();
     if (preview) return;
@@ -56,6 +56,21 @@ export default function useResize({ preview, updateSlide }: Args) {
               newHeight = origHeight - dy;
               newX = origX + dx;
               newY = origY + dy;
+              break;
+            // дополнительные стороны
+            case 'n':
+              newHeight = origHeight - dy;
+              newY = origY + dy;
+              break;
+            case 's':
+              newHeight = origHeight + dy;
+              break;
+            case 'w':
+              newWidth = origWidth - dx;
+              newX = origX + dx;
+              break;
+            case 'e':
+              newWidth = origWidth + dx;
               break;
           }
 
