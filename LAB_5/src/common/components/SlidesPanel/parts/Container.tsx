@@ -6,8 +6,11 @@ interface Props {
   slides: Slide[];
   hoverIndex: number | null;
   selectedSlideId: string;
+  selectedSlideIds: string[];
+  setSelectedSlideId: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>;
   scale: number;
-  onSlideClick: (slideId: string, index: number) => void;
+  onSlideClick?: (slideId: string, index: number, multi?: boolean) => void;
   handleDragStart: (index: number) => void;
   handleDragEnter: (index: number) => void;
   handleDragEnd: () => void;
@@ -18,7 +21,7 @@ interface Props {
 export default function SlidesContainer({
   slides,
   hoverIndex,
-  selectedSlideId,
+  selectedSlideIds,
   scale,
   onSlideClick,
   handleDragStart,
@@ -27,6 +30,11 @@ export default function SlidesContainer({
   noop,
   noopChange,
 }: Props) {
+  const handleClick = (e: React.MouseEvent, slideId: string, index: number) => {
+    const multi = e.ctrlKey || e.metaKey;
+    onSlideClick?.(slideId, index, multi);
+  };
+
   return (
     <div className="slides-container">
       {slides.map((slide, i) => (
@@ -35,9 +43,9 @@ export default function SlidesContainer({
           slide={slide}
           index={i}
           scale={scale}
-          selected={selectedSlideId === slide.id}
+          selected={selectedSlideIds.includes(slide.id)}
           hovered={i === hoverIndex}
-          onClick={() => onSlideClick(slide.id, i)}
+          onClick={(e) => handleClick(e, slide.id, i)}
           onDragStart={() => handleDragStart(i)}
           onDragEnter={() => handleDragEnter(i)}
           onDragEnd={handleDragEnd}

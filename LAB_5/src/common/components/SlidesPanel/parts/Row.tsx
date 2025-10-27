@@ -9,7 +9,7 @@ interface Props {
   scale: number;
   selected: boolean;
   hovered: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onDragStart: () => void;
   onDragEnter: () => void;
   onDragEnd: () => void;

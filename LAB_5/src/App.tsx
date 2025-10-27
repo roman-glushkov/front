@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEditor } from './store/editor';
 import ProjectTitle from './common/components/ProjectTitle';
 import Toolbar from './common/components/Toolbar';
@@ -23,7 +23,23 @@ function App() {
     handleTitleChange,
     updateSlide,
     setSelElId,
+    reorderSlides,
   } = useEditor();
+
+  const [selectedSlideId, setSelectedSlideId] = useState(selSlideId || '');
+  const [selectedSlideIds, setSelectedSlideIds] = useState<string[]>([]);
+
+  const onSlideClick = (id: string, index: number, multi?: boolean) => {
+    if (multi) {
+      setSelectedSlideIds((prev) =>
+        prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
+      );
+    } else {
+      setSelectedSlideId(id);
+      setSelectedSlideIds([id]);
+    }
+    handleSlideClick(id, index);
+  };
 
   return (
     <div className="container">
@@ -32,7 +48,7 @@ function App() {
         onTitleChange={handleTitleChange}
         onTitleCommit={handleTitleCommit}
         onTitleKeyDown={handleTitleKeyDown}
-        selSlideId={selSlideId}
+        selSlideId={selectedSlideId}
       />
 
       <Toolbar onAction={handleAction} />
@@ -40,8 +56,12 @@ function App() {
       <div className="main-content">
         <SlidesPanel
           slides={pres.slides}
-          selectedSlideId={selSlideId}
-          onSlideClick={handleSlideClick}
+          selectedSlideId={selectedSlideId}
+          selectedSlideIds={selectedSlideIds}
+          setSelectedSlideId={setSelectedSlideId}
+          setSelectedSlideIds={setSelectedSlideIds}
+          onSlideClick={onSlideClick}
+          onSlidesReorder={reorderSlides}
         />
 
         <Workspace
