@@ -30,7 +30,6 @@ export default function Workspace({
   handleTextKeyDown,
   preview,
 }: Props) {
-  // хук перетаскивания (возвращает функцию startDrag)
   const startDrag = useDrag({
     preview,
     setSelElId,
@@ -38,7 +37,6 @@ export default function Workspace({
     updateSlide,
   });
 
-  // хук изменения размера (возвращает startResize)
   const startResize = useResize({ preview, updateSlide });
 
   return (

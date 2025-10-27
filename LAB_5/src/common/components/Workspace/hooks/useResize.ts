@@ -57,7 +57,6 @@ export default function useResize({ preview, updateSlide }: Args) {
               newX = origX + dx;
               newY = origY + dy;
               break;
-            // дополнительные стороны
             case 'n':
               newHeight = origHeight - dy;
               newY = origY + dy;
