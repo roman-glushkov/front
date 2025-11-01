@@ -15,6 +15,9 @@ export default function useResize({ preview, updateSlide }: Args) {
     e.stopPropagation();
     if (preview) return;
 
+    const MIN_WIDTH = 20;
+    const MIN_HEIGHT = 20;
+
     const startX = e.clientX;
     const startY = e.clientY;
     const origWidth = el.size.width;
@@ -73,9 +76,27 @@ export default function useResize({ preview, updateSlide }: Args) {
               break;
           }
 
+          if (newWidth < MIN_WIDTH) {
+            newWidth = MIN_WIDTH;
+            if (['nw', 'w', 'sw'].includes(corner)) {
+              newX = origX + (origWidth - MIN_WIDTH);
+            } else {
+              newX = origX;
+            }
+          }
+
+          if (newHeight < MIN_HEIGHT) {
+            newHeight = MIN_HEIGHT;
+            if (['nw', 'n', 'ne'].includes(corner)) {
+              newY = origY + (origHeight - MIN_HEIGHT);
+            } else {
+              newY = origY;
+            }
+          }
+
           return {
             ...item,
-            size: { width: Math.max(newWidth, 20), height: Math.max(newHeight, 20) },
+            size: { width: newWidth, height: newHeight },
             position: { x: newX, y: newY },
           };
         }),

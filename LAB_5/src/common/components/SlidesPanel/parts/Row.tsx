@@ -13,8 +13,6 @@ interface Props {
   onDragStart: () => void;
   onDragEnter: () => void;
   onDragEnd: () => void;
-  noop: () => void;
-  noopChange: () => void;
 }
 
 export function SlideRow({
@@ -27,8 +25,6 @@ export function SlideRow({
   onDragStart,
   onDragEnter,
   onDragEnd,
-  noop,
-  noopChange,
 }: Props) {
   return (
     <div
@@ -40,7 +36,7 @@ export function SlideRow({
       onDragEnd={onDragEnd}
     >
       <SlideNumber number={index + 1} />
-      <SlidePreview slide={slide} scale={scale} noop={noop} noopChange={noopChange} />
+      <SlidePreview slide={slide} scale={scale} />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import { THEME_COLUMNS } from '../constants/colors';
-import { STANDARD_COLORS } from '../constants/templates';
+import { THEME_COLUMNS, STANDARD_COLORS } from '../constants/colors';
 import ThemeColorButton from './ThemeButton';
 
 interface Props {

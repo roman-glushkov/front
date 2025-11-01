@@ -244,7 +244,7 @@ export const slideDrawingWithCaption: Slide = {
       id: 'slide9_title1',
       content: 'Заголовок слайда',
       position: { x: 70, y: 40 },
-      size: { width: 354, height: 200 },
+      size: { width: 354, height: 160 },
       font: 'Arial',
       fontSize: 32,
       color: '#000000ff',

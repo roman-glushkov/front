@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slide } from '../../../store/types/presentation';
 import SlidesContainer from './parts/Container';
-import { useSlidesLogic } from './hooks/useLogic';
+import { useSlidesDrag } from './hooks/useSlidesDrag';
 import './styles.css';
 
 interface Props {
@@ -23,15 +23,8 @@ export default function SlidesPanel({
   onSlideClick,
   onSlidesReorder,
 }: Props) {
-  const {
-    localSlides,
-    hoverIndex,
-    handleDragStart,
-    handleDragEnter,
-    handleDragEnd,
-    noop,
-    noopChange,
-  } = useSlidesLogic({ slides, selectedSlideIds, setSelectedSlideIds, onSlidesReorder });
+  const { localSlides, hoverIndex, handleDragStart, handleDragEnter, handleDragEnd } =
+    useSlidesDrag({ slides, selectedSlideIds, setSelectedSlideIds, onSlidesReorder });
 
   return (
     <div className="slides-panel">
@@ -48,8 +41,6 @@ export default function SlidesPanel({
         handleDragStart={handleDragStart}
         handleDragEnter={handleDragEnter}
         handleDragEnd={handleDragEnd}
-        noop={noop}
-        noopChange={noopChange}
       />
     </div>
   );

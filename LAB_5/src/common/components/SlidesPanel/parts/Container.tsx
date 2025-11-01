@@ -14,8 +14,6 @@ interface Props {
   handleDragStart: (index: number) => void;
   handleDragEnter: (index: number) => void;
   handleDragEnd: () => void;
-  noop: () => void;
-  noopChange: () => void;
 }
 
 export default function SlidesContainer({
@@ -27,8 +25,6 @@ export default function SlidesContainer({
   handleDragStart,
   handleDragEnter,
   handleDragEnd,
-  noop,
-  noopChange,
 }: Props) {
   const handleClick = (e: React.MouseEvent, slideId: string, index: number) => {
     const multi = e.ctrlKey || e.metaKey;
@@ -49,8 +45,6 @@ export default function SlidesContainer({
           onDragStart={() => handleDragStart(i)}
           onDragEnter={() => handleDragEnter(i)}
           onDragEnd={handleDragEnd}
-          noop={noop}
-          noopChange={noopChange}
         />
       ))}
     </div>

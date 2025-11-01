@@ -5,8 +5,6 @@ import { Slide } from '../../../../store/types/presentation';
 interface Props {
   slide: Slide;
   scale: number;
-  noop: () => void;
-  noopChange: () => void;
 }
 
 export function SlidePreview({ slide, scale }: Props) {
@@ -24,13 +22,13 @@ export function SlidePreview({ slide, scale }: Props) {
       >
         <Workspace
           slide={slide}
-          selElId="" // пустой выбранный элемент
-          setSelElId={() => {}} // noop
-          updateSlide={() => {}} // noop
-          handleTextChange={() => {}} // noop
-          handleTextCommit={() => {}} // noop
-          handleTextKeyDown={() => {}} // noop
-          onElementClick={() => {}} // добавлено
+          selElId=""
+          setSelElId={() => {}}
+          updateSlide={() => {}}
+          handleTextChange={() => {}}
+          handleTextCommit={() => {}}
+          handleTextKeyDown={() => {}}
+          onElementClick={() => {}}
           preview
         />
       </div>

@@ -8,7 +8,7 @@ interface UseSlidesLogicArgs {
   onSlidesReorder?: (newOrder: Slide[]) => void;
 }
 
-export function useSlidesLogic({
+export function useSlidesDrag({
   slides,
   selectedSlideIds,
   setSelectedSlideIds,
@@ -65,9 +65,6 @@ export function useSlidesLogic({
     setHoverIndex(null);
   };
 
-  const noop = () => {};
-  const noopChange = () => {};
-
   return {
     localSlides,
     hoverIndex,
@@ -75,7 +72,5 @@ export function useSlidesLogic({
     handleDragEnter,
     handleDragEnd,
     setLocalSlides,
-    noop,
-    noopChange,
   };
 }
