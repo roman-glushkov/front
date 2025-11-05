@@ -52,15 +52,24 @@ export default function TextElementView({
         width: el.size.width,
         height: el.size.height,
         fontFamily: el.font,
-        fontSize: el.fontSize,
+        fontSize: `${el.fontSize}px`,
         color: el.color || '#1f2937',
         backgroundColor: el.backgroundColor || 'transparent',
+        textAlign: el.align || 'left',
+        lineHeight: el.lineHeight || 1.2,
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
+        flexDirection: 'column',
+        justifyContent:
+          el.verticalAlign === 'top'
+            ? 'flex-start'
+            : el.verticalAlign === 'middle'
+              ? 'center'
+              : 'flex-end',
         cursor: preview ? 'default' : 'grab',
         userSelect: 'none',
+        padding: 4,
+        boxSizing: 'border-box',
+        whiteSpace: 'pre-wrap',
       }}
     >
       {isEditingNow ? (
@@ -80,9 +89,10 @@ export default function TextElementView({
             backgroundColor: el.backgroundColor || 'transparent',
             border: 'none',
             outline: 'none',
-            textAlign: 'center',
+            textAlign: el.align || 'left',
             fontFamily: el.font,
-            fontSize: el.fontSize,
+            fontSize: `${el.fontSize}px`,
+            lineHeight: el.lineHeight || 1.2,
           }}
         />
       ) : (

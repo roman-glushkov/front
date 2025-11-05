@@ -67,6 +67,41 @@ export function changeTextSize(slide: Slide, elementId: string, newSize: number)
   return { ...slide, elements: newElements };
 }
 
+export function changeTextAlignment(
+  slide: Slide,
+  elementId: string,
+  alignment: 'left' | 'center' | 'right' | 'justify'
+): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId ? { ...el, align: alignment } : el
+    ),
+  };
+}
+
+export function changeTextVerticalAlignment(
+  slide: Slide,
+  elementId: string,
+  verticalAlign: 'top' | 'middle' | 'bottom'
+): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId ? { ...el, verticalAlign } : el
+    ),
+  };
+}
+
+export function changeTextLineHeight(slide: Slide, elementId: string, lineHeight: number): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId ? { ...el, lineHeight } : el
+    ),
+  };
+}
+
 export function changeTextFont(slide: Slide, elementId: string, newFont: string): Slide {
   const newElements = slide.elements.map((element) => {
     if (element.type === 'text' && element.id === elementId) {

@@ -48,6 +48,31 @@ export function useEditor() {
       setSelSlideId(newSlide.id);
     }
 
+    if (action.startsWith('Изменить размер текста:')) {
+      const size = parseInt(action.split(':')[1].trim(), 10);
+      if (slide && selElId) updateSlide((s) => func.changeTextSize(s, selElId, size));
+      return;
+    }
+
+    if (action.startsWith('Изменить горизонтальное выравнивание текста:')) {
+      const align = action.split(':')[1].trim() as 'left' | 'center' | 'right' | 'justify';
+      if (slide && selElId) updateSlide((s) => func.changeTextAlignment(s, selElId, align));
+      return;
+    }
+
+    if (action.startsWith('Изменить вертикальное выравнивание текста:')) {
+      const vAlign = action.split(':')[1].trim() as 'top' | 'middle' | 'bottom';
+      if (slide && selElId)
+        updateSlide((s) => func.changeTextVerticalAlignment(s, selElId, vAlign));
+      return;
+    }
+
+    if (action.startsWith('Изменить межстрочный интервал:')) {
+      const lineHeight = parseFloat(action.split(':')[1].trim());
+      if (slide && selElId) updateSlide((s) => func.changeTextLineHeight(s, selElId, lineHeight));
+      return;
+    }
+
     if (action.startsWith('Изменить цвет текста:')) {
       const color = action.split(':')[1].trim();
       if (slide && selElId) updateSlide((s) => func.changeTextColor(s, selElId, color));

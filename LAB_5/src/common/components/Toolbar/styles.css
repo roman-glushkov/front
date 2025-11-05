@@ -270,48 +270,54 @@
   position: absolute;
   top: 44px;
   left: 0;
-  background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, #1e3a8a 0%, #1d4ed8 100%);
+  border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  padding: 6px 0;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+  padding: 8px;
   z-index: 50;
-  min-width: 140px;
-  max-height: 220px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 100px;
+  max-height: 220px;
+  overflow-y: auto;
   animation: popupFade 0.15s ease-out;
 }
 
 .text-option-button {
   background: transparent;
   border: none;
-  padding: 6px 12px;
+  border-radius: 6px;
+  padding: 6px 10px;
   font-size: 13px;
   font-weight: 500;
-  color: #f8fafc;
+  color: #000000;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .text-option-button:hover {
-  background: #2563eb;
+  background: rgb(255 255 255 / 15%);
   color: #fff;
   transform: translateX(2px);
 }
 
+.text-option-button.active {
+  background: #2563eb;
+  font-weight: 600;
+  color: #fff;
+}
 .text-align-popup {
   position: absolute;
   top: 44px;
   left: 0;
   background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
   padding: 10px;
   z-index: 50;
   display: flex;
@@ -330,7 +336,7 @@
   font-weight: 600;
   color: #f8fafc;
   margin-bottom: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgb(255 255 255 / 15%);
   padding-bottom: 2px;
 }
 

@@ -34,15 +34,20 @@
   position: absolute;
   cursor: pointer;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: border 0.2s ease;
   border: 1px solid #c4c6c8;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .element[type='text'] {
   border: 1px solid #d1d5db;
+  display: block; /* вместо flex */
+  padding: 4px;
+  box-sizing: border-box;
+  text-align: left; /* дефолтное выравнивание */
+  line-height: 1.2; /* дефолтный межстрочный интервал */
+  white-space: pre-wrap; /* чтобы переносы работали */
 }
 
 .element[type='image'] {

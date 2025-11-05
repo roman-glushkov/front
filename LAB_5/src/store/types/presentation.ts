@@ -46,6 +46,9 @@ export type TextElement = BaseElement & {
   fontSize: number;
   color: string;
   backgroundColor?: string;
+  align?: 'left' | 'center' | 'right' | 'justify';
+  verticalAlign?: 'top' | 'middle' | 'bottom';
+  lineHeight?: number;
 };
 
 export type ImageElement = BaseElement & {

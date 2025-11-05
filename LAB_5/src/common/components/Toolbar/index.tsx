@@ -32,6 +32,7 @@ export default function Toolbar({ onAction }: Props) {
         handleTemplateSelect={handlers.handleTemplateSelect}
         handleColorSelect={handlers.handleColorSelect}
         onAction={onAction}
+        handleTextOptionSelect={handlers.handleTextOptionSelect}
       />
     </div>
   );

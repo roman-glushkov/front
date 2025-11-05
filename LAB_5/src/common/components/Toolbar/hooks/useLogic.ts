@@ -53,6 +53,18 @@ export function useToolbarLogic(onAction: (action: string) => void) {
     setShowBackgroundColorPicker(false);
   };
 
+  const handleTextOptionSelect = (key: string) => {
+    if (key.endsWith('px')) {
+      onAction(`Изменить размер текста: ${key}`);
+    } else if (['left', 'center', 'right', 'justify'].includes(key)) {
+      onAction(`Изменить горизонтальное выравнивание текста: ${key}`);
+    } else if (['top', 'middle', 'bottom'].includes(key)) {
+      onAction(`Изменить вертикальное выравнивание текста: ${key}`);
+    } else if (!isNaN(Number(key))) {
+      onAction(`Изменить межстрочный интервал: ${key}`);
+    }
+  };
+
   return {
     state: {
       activeGroup,
@@ -70,6 +82,7 @@ export function useToolbarLogic(onAction: (action: string) => void) {
       handleFillColorClick,
       handleBackgroundColorClick,
       handleColorSelect,
+      handleTextOptionSelect,
     },
   };
 }
