@@ -70,6 +70,10 @@ export default function TextElementView({
         padding: 4,
         boxSizing: 'border-box',
         whiteSpace: 'pre-wrap',
+        fontWeight: el.bold ? 'bold' : 'normal',
+        fontStyle: el.italic ? 'italic' : 'normal',
+        textDecoration: el.underline ? 'underline' : 'none',
+
       }}
     >
       {isEditingNow ? (
@@ -93,6 +97,10 @@ export default function TextElementView({
             fontFamily: el.font,
             fontSize: `${el.fontSize}px`,
             lineHeight: el.lineHeight || 1.2,
+            fontWeight: el.bold ? 'bold' : 'normal',
+            fontStyle: el.italic ? 'italic' : 'normal',
+            textDecoration: el.underline ? 'underline' : 'none',
+
           }}
         />
       ) : (

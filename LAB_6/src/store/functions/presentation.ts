@@ -137,3 +137,36 @@ export function changeTextBackgroundColor(
     ),
   };
 }
+
+export function toggleTextBold(slide: Slide, elementId: string): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId
+        ? { ...el, bold: !el.bold }
+        : el
+    ),
+  };
+}
+
+export function toggleTextItalic(slide: Slide, elementId: string): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId
+        ? { ...el, italic: !el.italic }
+        : el
+    ),
+  };
+}
+
+export function toggleTextUnderline(slide: Slide, elementId: string): Slide {
+  return {
+    ...slide,
+    elements: slide.elements.map((el) =>
+      el.type === 'text' && el.id === elementId
+        ? { ...el, underline: !el.underline }
+        : el
+    ),
+  };
+}

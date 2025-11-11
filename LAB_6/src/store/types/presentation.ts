@@ -49,6 +49,10 @@ export type TextElement = BaseElement & {
   align?: 'left' | 'center' | 'right' | 'justify';
   verticalAlign?: 'top' | 'middle' | 'bottom';
   lineHeight?: number;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+
 };
 
 export type ImageElement = BaseElement & {

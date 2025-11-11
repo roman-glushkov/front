@@ -176,6 +176,54 @@ export const editorSlice = createSlice({
           );
         return;
       }
+      
+      if (act === 'toggle-bold' && slide && elId) {
+        state.presentation.slides = state.presentation.slides.map((s) =>
+          s.id === slide.id
+            ? {
+                ...s,
+                elements: s.elements.map((el) =>
+                  el.id === elId && el.type === 'text'
+                    ? { ...el, bold: !el.bold }
+                    : el
+                ),
+              }
+            : s
+        );
+        return;
+      }
+
+      if (act === 'toggle-italic' && slide && elId) {
+        state.presentation.slides = state.presentation.slides.map((s) =>
+          s.id === slide.id
+            ? {
+                ...s,
+                elements: s.elements.map((el) =>
+                  el.id === elId && el.type === 'text'
+                    ? { ...el, italic: !el.italic }
+                    : el
+                ),
+              }
+            : s
+        );
+        return;
+      }
+
+      if (act === 'toggle-underline' && slide && elId) {
+        state.presentation.slides = state.presentation.slides.map((s) =>
+          s.id === slide.id
+            ? {
+                ...s,
+                elements: s.elements.map((el) =>
+                  el.id === elId && el.type === 'text'
+                    ? { ...el, underline: !el.underline }
+                    : el
+                ),
+              }
+            : s
+        );
+        return;
+      }
 
       switch (act) {
         case 'Удалить слайд':

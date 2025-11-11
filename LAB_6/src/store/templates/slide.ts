@@ -13,6 +13,8 @@ export const slideTitle: Slide = {
       font: 'Arial',
       fontSize: 60,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -23,6 +25,8 @@ export const slideTitle: Slide = {
       font: 'Arial',
       fontSize: 24,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -40,6 +44,8 @@ export const slideTitleAndObject: Slide = {
       font: 'Arial',
       fontSize: 44,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -50,6 +56,8 @@ export const slideTitleAndObject: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -67,6 +75,8 @@ export const slideSectionHeader: Slide = {
       font: 'Arial',
       fontSize: 44,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -77,6 +87,8 @@ export const slideSectionHeader: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -94,6 +106,8 @@ export const slideTwoObjects: Slide = {
       font: 'Arial',
       fontSize: 44,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -104,6 +118,8 @@ export const slideTwoObjects: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -114,6 +130,8 @@ export const slideTwoObjects: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -131,6 +149,8 @@ export const slideComparison: Slide = {
       font: 'Arial',
       fontSize: 44,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -141,6 +161,8 @@ export const slideComparison: Slide = {
       font: 'Arial',
       fontSize: 24,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -151,6 +173,8 @@ export const slideComparison: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -161,6 +185,8 @@ export const slideComparison: Slide = {
       font: 'Arial',
       fontSize: 24,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -171,6 +197,8 @@ export const slideComparison: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -188,6 +216,8 @@ export const slideJustHeadline: Slide = {
       font: 'Arial',
       fontSize: 44,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -211,6 +241,8 @@ export const slideObjectWithSignature: Slide = {
       font: 'Arial',
       fontSize: 32,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -221,6 +253,8 @@ export const slideObjectWithSignature: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -231,6 +265,8 @@ export const slideObjectWithSignature: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
@@ -248,6 +284,8 @@ export const slideDrawingWithCaption: Slide = {
       font: 'Arial',
       fontSize: 32,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -258,6 +296,8 @@ export const slideDrawingWithCaption: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
     {
       type: 'text',
@@ -268,6 +308,8 @@ export const slideDrawingWithCaption: Slide = {
       font: 'Arial',
       fontSize: 28,
       color: '#000000ff',
+      align: 'center',
+      verticalAlign: 'middle',
     },
   ],
 };
